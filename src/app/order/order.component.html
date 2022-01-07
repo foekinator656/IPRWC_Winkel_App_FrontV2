@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12">
+    <hr>
+    <h1>Totale Prijs: &euro; {{orderService.totalOrderPrice}} </h1>
+    <hr>
+    <div class="row">
+      <button class="btn btn-primary btn-success" [disabled]="orderService.bikesInCart.length === 0" (click)="onOrderButtonPressed()">Bestellen!</button>
+    </div>
+    <hr>
+    <app-order-item
+      *ngFor="let singleBike of orderService.bikesInCart, let i = index" [bikeIndex]="i"
+      [bike]="singleBike"></app-order-item>
+    <hr>
+    <div class="row">
+      <button class="btn btn-primary btn-success" [disabled]="orderService.bikesInCart.length === 0" (click)="onOrderButtonPressed()">Bestellen!</button>
+    </div>
+  </div>
+</div>

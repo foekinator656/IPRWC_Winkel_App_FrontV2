@@ -1,0 +1,51 @@
+<!--<div class="list-group">-->
+<!--  <div class="list-group-item">-->
+<!--  <img [src]="bikeModel.photoUrl">-->
+<!--  </div>-->
+<!--</div>-->
+<a
+  style="cursor: pointer;"
+  class="list-group-item clearfix">
+  <div class="list-group-item-heading">
+    <div class="row">
+      <div class="col-xs-6">
+        <span class="pull-left">
+          <img
+            [src]="bikeModel.photoUrl"
+            alt="{{ bikeModel.bikeModelName }}"
+            class="img-responsive"
+            style="max-height: 200px;">
+        </span>
+      </div>
+      <div class="col-xs-6">
+        <div class="row">
+          <h4>{{ bikeModel.bikeModelName }}</h4> <br>
+          <h4>&euro;&nbsp;{{ bikeModel.priceOfTheDay }}</h4>
+
+        </div>
+        <div class="row">
+            <span class="pull-right">
+              <button class="btn btn-primary" (click)=onAddToCart(bikeModel.bikeModelId) >In Winkelwagen</button>
+              </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+<!--<a-->
+<!--  style="cursor: pointer;"-->
+<!--  [routerLink]="[index]"-->
+<!--  routerLinkActive="active"-->
+<!--  class="list-group-item clearfix">-->
+<!--  <div class="pull-left">-->
+<!--    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>-->
+<!--    <p class="list-group-item-text">{{ recipe.description }}</p>-->
+<!--  </div>-->
+<!--  <span class="pull-right">-->
+<!--        <img-->
+<!--          [src]="recipe.imagePath"-->
+<!--          alt="{{ recipe.name }}"-->
+<!--          class="img-responsive"-->
+<!--          style="max-height: 50px;">-->
+<!--      </span>-->
+<!--</a>-->

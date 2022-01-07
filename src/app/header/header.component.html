@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default" style="background-color: deepskyblue">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand" style="color: white">EbikeNL</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li role="presentation"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/shop">Shop</a>
+        </li>
+        <li role="presentation"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/order">Winkelmand</a>
+        </li>
+        <li role="presentation"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/login">Inloggen/Aanmelden</a>
+        </li>
+        <li *ngIf="loginService.userIsAdmin" role="presentation"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/manage">Beheer</a>
+        </li>
+        <li role="presentation"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/account">{{loginService.welcomeString}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

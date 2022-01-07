@@ -3,16 +3,42 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {HttpClientModule} from "@angular/common/http";
+import { ShopContentComponent } from './shop-content/shop-content.component';
+import { ShopItemComponent } from './shop-content/shop-item/shop-item.component';
+import { HeaderComponent } from './header/header.component';
+import { OrderComponent } from './order/order.component';
+import { PaymentComponent } from './order/payment/payment.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import {FormsModule} from "@angular/forms";
+import {LoginService} from "./login/login.service";
+import {OrderService} from "./order/order.service";
+import { OrderItemComponent } from './order/order-item/order-item.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationFormComponent } from './login/registration-form/registration-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ShopContentComponent,
+    ShopItemComponent,
+    HeaderComponent,
+    OrderComponent,
+    PaymentComponent,
+    LoginFormComponent,
+    ErrorPageComponent,
+    OrderItemComponent,
+    LoginComponent,
+    RegistrationFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [LoginService,OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
