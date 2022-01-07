@@ -23,17 +23,13 @@ export class LoginService {
     if (!this.userIsLoggedIn){
       this.http.post<ShopUser>(this.apiService.apiUrl+'shopuser/login',loginRequest)
         .subscribe(shopUser => {
-            // console.log(shopUser);
             this.shopUser = shopUser;
             this.userIsLoggedIn = true;
             this.makeWelcomeString();
             let currentShopUserRole = this.shopUser.shopUserRole.toString();
 
-            // console.log(currentShopUserRole)
 
             this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
-            // console.log(this.shopUser.shopUserRole.toString())
-            // console.log(this.userIsAdmin);
           },error => {
             console.log(error);
             this.errorMessage = error;
@@ -57,7 +53,6 @@ export class LoginService {
   }
 
   makeWelcomeString() {
-    // console.log(this.shopUser);
     if (this.userIsLoggedIn){
       if (this.userIsAdmin){
         this.welcomeString = "Welkom Beheerder " + this.shopUser.firstName;
@@ -76,7 +71,6 @@ export class LoginService {
   }
 
   registrationUser(registrationRequest: ShopUser) {
-    // console.log(" XXXXX in registrationUser" + this.userIsLoggedIn);
     if (!this.userIsLoggedIn) {
 
       this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)

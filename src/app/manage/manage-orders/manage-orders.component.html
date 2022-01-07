@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="checkIfUserIsAdmin()">
   <div class="col-xs-12">
     <div class="alert alert-danger" *ngIf="this.orderService.errorMessage">
       <p><strong>Probleem met laden Orders van de database</strong></p>

@@ -22,7 +22,7 @@ export class PaymentComponent implements OnInit {
 
   checkNoEmptyCart() {
     if (this.orderService.bikesInCart.length === 0){
-      this.router.navigate(['/','shop']);
+      this.router.navigate(['/','not-found']);
       return false;
     }
     return true;
