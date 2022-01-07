@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from "../login/login.service";
 import {ShopUserRole} from "../shared/models/shop-user-role.enum";
+import {AccountService} from "../login/account/account.service";
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,14 @@ export class HeaderComponent implements OnInit {
   dataAdmin = ShopUserRole.DATA_ADMIN;
   sysAdmin = ShopUserRole.SYS_ADMIN;
 
-  constructor(public loginService: LoginService) { }
+  constructor(public loginService: LoginService, public accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loginService.makeWelcomeString()
+  }
+
+  onProfileView() {
+    this.accountService.validAccountView = true;
+    this.accountService.accountViewUser = this.loginService.shopUser;
   }
 }

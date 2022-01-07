@@ -34,55 +34,25 @@ export class RegistrationFormComponent implements OnInit {
     console.log(" ===== " + registrationForm.value.postalcodeReg);
     console.log(" ===== " + registrationForm.value.cityReg);
 
-
-    console.log(" ===== ");
-    console.log(" ===== " + "ik ben hier");
-    console.log(" ===== " );
-
-
-
-    // let registrationRequest: ShopUser =
-    //   new ShopUser(null,
-    //     registrationForm.value.emailReg,
-    //     registrationForm.value.passwordReg,
-    //     ShopUserRole.CUSTOMER,
-    //     registrationForm.value.dobYear,
-    //     registrationForm.value.dobMonth,
-    //     registrationForm.value.dobDay,
-    //     registrationForm.value.firstNameReg,
-    //     registrationForm.value.middleNameReg,
-    //     registrationForm.value.lastNameReg,
-    //     registrationForm.value.streetReg,
-    //     registrationForm.value.houseNrReg,
-    //     registrationForm.value.postalcodeReg,
-    //     registrationForm.value.cityReg);
     let registrationRequest: ShopUser =
       new ShopUser(null,
-        "registrationForm.value.emailReg@ap.com",
-        "registrationForm.value.passwordReg",
+        registrationForm.value.emailReg,
+        registrationForm.value.passwordReg,
         ShopUserRole.CUSTOMER,
-        1990,
-        1,
-        1,
-        "registrationForm.value.firstNameReg",
-        "registrationForm.value.middleNameReg",
-        "registrationForm.value.lastNameReg",
-        "registrationForm.value.streetReg",
-        "registrationForm.value.houseNrReg",
-        "2215WB",
-        "registrationForm.value.cityReg");
-    console.log(registrationRequest);
+        registrationForm.value.dobYear,
+        registrationForm.value.dobMonth,
+        registrationForm.value.dobDay,
+        registrationForm.value.firstNameReg,
+        registrationForm.value.middleNameReg,
+        registrationForm.value.lastNameReg,
+        registrationForm.value.streetReg,
+        registrationForm.value.houseNrReg,
+        registrationForm.value.postalcodeReg,
+        registrationForm.value.cityReg);
 
-    console.log(" ===== ");
-    console.log(" ===== " + "ik ben hier +  let registrationRequest: ShopUser =");
-    console.log(" ===== " );
+    console.log("registrationRequest onCompletRegistration" )
+    console.log(registrationRequest);
     this.loginService.registrationUser(registrationRequest);
-    console.log(" ===== ");
-    console.log(" ===== " + "ik ben hier + this.loginService.registrationUser(registrationRequest)");
-    console.log(" ===== " );
     this.loginService.makeWelcomeString();
-    console.log(" ===== ");
-    console.log(" ===== " + "ik ben hier + this.loginService.makeWelcomeString()");
-    console.log(" ===== " );
   }
 }

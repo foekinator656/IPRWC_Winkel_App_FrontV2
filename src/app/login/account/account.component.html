@@ -1,0 +1,95 @@
+<div class="row" *ngIf="accountService.validAccountView">
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">
+      Naam:
+    </div>
+    <div class="col-md-5">
+      <p>{{accountService.accountViewUser.firstName}}{{accountService.accountViewUser.middleName.length === 0 ? "" :  " " + accountService.accountViewUser.middleName}} {{accountService.accountViewUser.lastName}}</p>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-md-2 col-md-offset-2">
+      Email:
+    </div>
+    <div class="col-md-5">
+      <p>{{accountService.accountViewUser.shopUserEmail}}</p>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-md-2 col-md-offset-2">
+      Geboorte datum:
+    </div>
+    <div class="col-md-5">
+      <p>{{accountService.accountViewUser.dayOfBirth}}  {{accountService.accountViewUser.monthOfBirth}} {{accountService.accountViewUser.yearOfBirth}}</p>
+    </div>
+  </div>
+
+  <!--              display address         -->
+
+  <div class="row" *ngIf="!accountService.changeAddressMode">
+    <div class="col-md-2 col-md-offset-2">
+      Adres:
+    </div>
+    <div class="col-md-5">
+      <p>{{accountService.accountViewUser.street}} {{accountService.accountViewUser.houseNr}} <br> {{accountService.accountViewUser.postalCode}}, {{accountService.accountViewUser.city}}</p>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary" (click)="OnChangeAddress()">Wijzig adres</button>
+    </div>
+  </div>
+
+  <!--              change address form        -->
+  <!--  <div class="alert alert-danger" *ngIf="orderService.errorMessage">-->
+  <!--    <p><strong>Betaling ging fout!</strong></p>-->
+  <!--  </div>-->
+  <!--  <div class="alert alert-success" *ngIf="orderService.sendSuccess">-->
+  <!--    <p><strong>Uw bestelling is goed verzonden en heeft order nummer {{orderService.responseBikeOrderId}}! Bedankt.</strong></p>-->
+  <!--  </div>-->
+  <div *ngIf="accountService.changeAddressMode" >
+    <form #changeAddressForm="ngForm" (ngSubmit)="onSubmitChangeShopUserAddress(changeAddressForm)">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-5">
+          <div class="form-group">
+            <label for="streetChange">Straat:</label>
+            <input type="text" id="streetChange" class="form-control" [placeholder]="accountService.accountViewUser.street" ngModel name="streetChange" required>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="houseNrChange">Huisnummer:</label>
+            <input type="text" id="houseNrChange" class="form-control" [placeholder]="accountService.accountViewUser.houseNr" ngModel name="houseNrChange" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-2 col-md-2">
+          <div class="form-group">
+            <label for="postalCodeChange">Postcode:</label>
+            <input type="text" id="postalCodeChange" class="form-control"  [placeholder]="accountService.accountViewUser.postalCode" ngModel name="postalCodeChange" minlength="6" maxlength="6" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cityChange">Plaats:</label>
+            <input type="text" id="cityChange" class="form-control" [placeholder]="accountService.accountViewUser.city" ngModel name="cityChange" required>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary pull-right"  type="submit">
+          Wijzigingen opslaan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<div  class="row" *ngIf="!accountService.validAccountView">
+  <div class="col-md-offset-2">
+    <p>Er is geen user om weer te geven.</p>
+    <br>
+    <button class="btn btn-primary" (click)="onGoToShop()">Ga naar de winkel</button>
+  </div>
+</div>

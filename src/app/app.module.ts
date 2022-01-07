@@ -20,6 +20,7 @@ import { RegistrationFormComponent } from './login/registration-form/registratio
 import { ManageComponent } from './manage/manage.component';
 import { ManageUsersComponent } from './manage/manage-users/manage-users.component';
 import { ManageOrdersComponent } from './manage/manage-orders/manage-orders.component';
+import { AccountComponent } from './login/account/account.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ManageOrdersComponent } from './manage/manage-orders/manage-orders.comp
     RegistrationFormComponent,
     ManageComponent,
     ManageUsersComponent,
-    ManageOrdersComponent
+    ManageOrdersComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

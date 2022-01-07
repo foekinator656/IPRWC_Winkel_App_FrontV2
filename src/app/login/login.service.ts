@@ -8,7 +8,7 @@ import {ApiService} from "../shared/api.service";
   providedIn: 'root'
 })
 export class LoginService {
-  public errorMessage: string = "ikeb hier";
+  public errorMessage!: string;
   private _shopUser!: ShopUser;
   private _userIsLoggedIn: boolean = false;
   public welcomeString: string = "";
@@ -23,17 +23,17 @@ export class LoginService {
     if (!this.userIsLoggedIn){
       this.http.post<ShopUser>(this.apiService.apiUrl+'shopuser/login',loginRequest)
         .subscribe(shopUser => {
-            console.log(shopUser);
+            // console.log(shopUser);
             this.shopUser = shopUser;
             this.userIsLoggedIn = true;
             this.makeWelcomeString();
             let currentShopUserRole = this.shopUser.shopUserRole.toString();
 
-            console.log(currentShopUserRole)
+            // console.log(currentShopUserRole)
 
             this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
-            console.log(this.shopUser.shopUserRole.toString())
-            console.log(this.userIsAdmin);
+            // console.log(this.shopUser.shopUserRole.toString())
+            // console.log(this.userIsAdmin);
           },error => {
             console.log(error);
             this.errorMessage = error;
@@ -57,7 +57,7 @@ export class LoginService {
   }
 
   makeWelcomeString() {
-    console.log(this.shopUser);
+    // console.log(this.shopUser);
     if (this.userIsLoggedIn){
       if (this.userIsAdmin){
         this.welcomeString = "Welkom Beheerder " + this.shopUser.firstName;
@@ -76,28 +76,10 @@ export class LoginService {
   }
 
   registrationUser(registrationRequest: ShopUser) {
-    console.log(" XXXXX in registrationUser" +  this.userIsLoggedIn);
+    // console.log(" XXXXX in registrationUser" + this.userIsLoggedIn);
     if (!this.userIsLoggedIn) {
-      let paramString = "?emailReg=" + registrationRequest.shopUserEmail+"\"";
-      paramString += "&passwordReg=" + registrationRequest.password+"\"";
-      paramString += "&dobYear=" + registrationRequest.yearOfBirth+"\"";
-      paramString += "&dobMonth=" + registrationRequest.monthOfBirth+"\"";
-      paramString += "&dobDay=" + registrationRequest.dayOfBirth+"\"";
-      paramString += "&firstNameReg=" + registrationRequest.firstName+"\"";
-      paramString += "&middleNameReg=" + registrationRequest.middleName+"\"";
-      paramString += "&lastNameReg=" + registrationRequest.lastNam+"\"";
-      paramString += "&streetReg=" + registrationRequest.street+"\"";
-      paramString += "&houseNrReg=" + registrationRequest.houseNr+"\"";
-      paramString += "&postalcodeReg=" + registrationRequest.postalCode+"\"";
-      paramString += "&cityReg=" + registrationRequest.city+"\"";
-      console.log(paramString);
 
-
-
-
-
-
-      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/register' + paramString, registrationRequest)
+      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)
         .subscribe(shopUser => {
             console.log(shopUser);
             this.shopUser = shopUser;
