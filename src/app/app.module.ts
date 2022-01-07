@@ -17,6 +17,9 @@ import {OrderService} from "./order/order.service";
 import { OrderItemComponent } from './order/order-item/order-item.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationFormComponent } from './login/registration-form/registration-form.component';
+import { ManageComponent } from './manage/manage.component';
+import { ManageUsersComponent } from './manage/manage-users/manage-users.component';
+import { ManageOrdersComponent } from './manage/manage-orders/manage-orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { RegistrationFormComponent } from './login/registration-form/registratio
     ErrorPageComponent,
     OrderItemComponent,
     LoginComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    ManageComponent,
+    ManageUsersComponent,
+    ManageOrdersComponent
   ],
   imports: [
     BrowserModule,
