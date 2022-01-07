@@ -42,18 +42,11 @@ export class OrderService {
     for (let i = 0; i < this.bikesInCart.length; i++) {
       bikeModelIds.push(this.bikesInCart[i].bikeModel.bikeModelId);
     }
-    console.log(" ====== send Order ======");
-    console.log(bikeModelIds);
-    console.log(" userId: "+this.loginFormService.shopUser.shopUserId);
     let shopUserId: number = this.loginFormService.shopUser.shopUserId;
     this.http.post<number>(this.apiService.apiUrl+'bikeorder/'+shopUserId,bikeModelIds)
       .subscribe(response => {
-        console.log("======Response: " + response);
-        console.log(" Bike order ID " + response);
         this.responseBikeOrderId = response;
         this.sendSuccess = true;
-
-
       },(error => {
         console.log(error)
         this.errorMessage = error;
@@ -62,6 +55,7 @@ export class OrderService {
       await this.delay(1000);
     }
     this.bikesInCart = [];
+    this.totalOrderPrice = 0;
     return  this.responseBikeOrderId;
   }
 }
