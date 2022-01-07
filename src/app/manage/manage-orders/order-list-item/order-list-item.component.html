@@ -1,0 +1,20 @@
+<a
+  style="cursor: pointer;"
+  class="list-group-item clearfix">
+  <div class="list-group-item-heading">
+    <div class="row">
+      <div class="col-xs-2">
+        {{bikeOrder.bikeOrderId}}
+      </div>
+      <div class="col-xs-2" >
+        {{bikeOrder.shopUser.firstName}}{{bikeOrder.shopUser.middleName.length === 0 ? "" : " " + bikeOrder.shopUser.middleName}} {{bikeOrder.shopUser.lastName}}
+      </div>
+      <div>
+        {{bikeOrderPrice}}
+        <!--      <div class="col-xs-6">-->
+        <!--            <button class="btn btn-primary" (click)=onAddToCart(bikeModel.bikeModelId) >In Winkelwagen</button>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+</a>

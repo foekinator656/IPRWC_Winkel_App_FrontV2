@@ -21,6 +21,7 @@ import { ManageComponent } from './manage/manage.component';
 import { ManageUsersComponent } from './manage/manage-users/manage-users.component';
 import { ManageOrdersComponent } from './manage/manage-orders/manage-orders.component';
 import { AccountComponent } from './login/account/account.component';
+import { OrderListItemComponent } from './manage/manage-orders/order-list-item/order-list-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AccountComponent } from './login/account/account.component';
     ManageComponent,
     ManageUsersComponent,
     ManageOrdersComponent,
-    AccountComponent
+    AccountComponent,
+    OrderListItemComponent
   ],
   imports: [
     BrowserModule,
