@@ -24,7 +24,9 @@ export class LoginFormComponent implements OnInit {
     // let loginRequest = new LoginRequest(loginForm.value.email, loginForm.value.password);
 
     //  tijdelijk  ================= KAN WEG
-    let loginRequest = new LoginRequest("SysAdmin@users.com", "sysadmin");
+    let email = btoa("SysAdmin@users.com");
+    let pass = btoa("sysadmin")
+    let loginRequest = new LoginRequest(email, pass);
     // let loginRequest = new LoginRequest("customer@users.com", "DataAdmin");
 
     this.loginService.loginShopUser(loginRequest);

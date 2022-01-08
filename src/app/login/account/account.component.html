@@ -12,7 +12,7 @@
       Email:
     </div>
     <div class="col-md-5">
-      <p>{{accountService.accountViewUser.shopUserEmail}}</p>
+      <p>{{accountService.getShopUserEmail()}}</p>
     </div>
   </div>
   <div class="row" >
@@ -39,12 +39,7 @@
   </div>
 
   <!--              change address form        -->
-  <!--  <div class="alert alert-danger" *ngIf="orderService.errorMessage">-->
-  <!--    <p><strong>Betaling ging fout!</strong></p>-->
-  <!--  </div>-->
-  <!--  <div class="alert alert-success" *ngIf="orderService.sendSuccess">-->
-  <!--    <p><strong>Uw bestelling is goed verzonden en heeft order nummer {{orderService.responseBikeOrderId}}! Bedankt.</strong></p>-->
-  <!--  </div>-->
+
   <div *ngIf="accountService.changeAddressMode" >
     <form #changeAddressForm="ngForm" (ngSubmit)="onSubmitChangeShopUserAddress(changeAddressForm)">
       <div class="row">

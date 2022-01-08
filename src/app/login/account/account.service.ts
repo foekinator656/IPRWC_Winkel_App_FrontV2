@@ -39,7 +39,9 @@ export class AccountService {
         await this.delay(1000);
       }
     }
+  }
 
-
+  getShopUserEmail() {
+    return atob(this.accountViewUser.shopUserEmail);
   }
 }
