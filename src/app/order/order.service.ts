@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../shared/api.service";
 import {BikeModel} from "../shared/models/bike-model.model";
 import {LoginService} from "../login/login.service";
+import {AuthService} from "../shared/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class OrderService {
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
   public errorMessage!: string;
 
-  constructor(private http: HttpClient,private apiService: ApiService, private loginFormService: LoginService) { }
+  constructor(private http: HttpClient,private apiService: ApiService, public authService: AuthService) { }
 
 
   addBikeModelToCart(bikeModelId: number) {
@@ -42,7 +43,7 @@ export class OrderService {
     for (let i = 0; i < this.bikesInCart.length; i++) {
       bikeModelIds.push(this.bikesInCart[i].bikeModel.bikeModelId);
     }
-    let shopUserId: number = this.loginFormService.shopUser.shopUserId;
+    let shopUserId: number = this.authService.authenticatedUser.shopUser.shopUserId;
     this.http.post<number>(this.apiService.apiUrl+'bikeorder/'+shopUserId,bikeModelIds)
       .subscribe(response => {
         this.responseBikeOrderId = response;

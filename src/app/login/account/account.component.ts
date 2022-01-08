@@ -4,6 +4,7 @@ import {AccountService} from "./account.service";
 import {NgForm} from "@angular/forms";
 import {LoginRequest} from "../../shared/models/login.request";
 import {LoginService} from "../login.service";
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
   selector: 'app-account',
@@ -12,9 +13,11 @@ import {LoginService} from "../login.service";
 })
 export class AccountComponent implements OnInit {
 
-  constructor(public accountService: AccountService,public loginService: LoginService, public router: Router) { }
+  constructor(public accountService: AccountService,public loginService: LoginService,
+              public router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.accountService.accountViewUser = this.authService.authenticatedUser.shopUser;
   }
 
   OnChangeAddress() {

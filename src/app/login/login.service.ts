@@ -5,34 +5,34 @@ import {ShopUser} from "../shared/models/shop-user.model";
 import {ApiService} from "../shared/api.service";
 import {Router} from "@angular/router";
 import {AccountService} from "./account/account.service";
-import {ShopUserAuth} from "../shared/models/ShopUserAuth.model";
+import {ShopUserAuth} from "../shared/models/shop-user-auth.model";
+import {AuthService} from "../shared/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  public jwt: string = "";
+  public authUser!: AuthService;
   public errorMessage!: string;
-  public shopUser!: ShopUser;
   public userIsLoggedIn: boolean = false;
   public welcomeString: string = "";
   public userIsAdmin: boolean = false;
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
   public adminRoles = ["SYS_ADMIN","DATA_ADMIN"];
 
-  constructor(private http: HttpClient, private apiService: ApiService,public router: Router, public accountService: AccountService ) { }
+  constructor(private http: HttpClient, private apiService: ApiService,
+              public router: Router, public authService: AuthService,
+              public accountService: AccountService) { }
 
   loginShopUser(loginRequest: LoginRequest){
 
     if (!this.userIsLoggedIn){
       this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
-        .subscribe(ShopUserAuth => {
-            this.shopUser = ShopUserAuth.shopUser;
-            this.jwt = ShopUserAuth.jwt;
+        .subscribe(shopUserAuth => {
+            this.authService.authenticatedUser = shopUserAuth;
             this.userIsLoggedIn = true;
-            console.log(ShopUserAuth);
             this.makeWelcomeString();
-            let currentShopUserRole = this.shopUser.shopUserRole.toString();
+            let currentShopUserRole =this.authService.authenticatedUser.shopUser.shopUserRole.toString();
             this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
           },error => {
             console.log(error);
@@ -44,10 +44,11 @@ export class LoginService {
 
   makeWelcomeString() {
     if (this.userIsLoggedIn){
+      let shopUserFirstName = this.authService.authenticatedUser.shopUser.firstName;
       if (this.userIsAdmin){
-        this.welcomeString = "Welkom Beheerder " + this.shopUser.firstName;
+        this.welcomeString = "Welkom Beheerder " + shopUserFirstName;
       } else {
-        this.welcomeString = "Welkom Klant " + this.shopUser.firstName;
+        this.welcomeString = "Welkom Klant " + shopUserFirstName;
       }
     } else {
       this.welcomeString = "Welkom Gast";
@@ -58,22 +59,19 @@ export class LoginService {
     this.userIsLoggedIn = false;
     this.makeWelcomeString();
     this.userIsAdmin = false;
+    this.authService.authenticatedUser.jwt = "";
   }
 
   async registrationUser(registrationRequest: ShopUser) {
     let newShopUserSaved = false;
     if (!this.userIsLoggedIn) {
-      console.log("voor de post" + registrationRequest);
       this.http.post<ShopUserAuth>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)
-        .subscribe(ShopUserAuth => {
-          this.shopUser = ShopUserAuth.shopUser;
-          this.jwt = ShopUserAuth.jwt;
-          this.accountService.accountViewUser = this.shopUser;
+        .subscribe(shopUserAuth => {
+          this.authService.authenticatedUser = shopUserAuth;
           this.userIsLoggedIn = true;
           newShopUserSaved = true;
-          console.log(" newShopUserSaved wordt gezet " + newShopUserSaved);
           this.makeWelcomeString();
-          let currentShopUserRole = this.shopUser.shopUserRole.toString();
+          let currentShopUserRole = this.authService.authenticatedUser.shopUser.shopUserRole.toString();
           this.userIsAdmin = (this.adminRoles.indexOf(currentShopUserRole) > -1);
         }, error => {
           console.log(error);
