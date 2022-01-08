@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {ShopUser} from "../../shared/models/shop-user.model";
 import {ShopUserRole} from "../../shared/models/shop-user-role.enum";
 import {LoginService} from "../login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration-form',
@@ -36,8 +37,8 @@ export class RegistrationFormComponent implements OnInit {
 
     let registrationRequest: ShopUser =
       new ShopUser(null,
-        registrationForm.value.emailReg,
-        registrationForm.value.passwordReg,
+        this.encodeString(registrationForm.value.emailReg),
+        this.encodeString(registrationForm.value.passwordReg),
         ShopUserRole.CUSTOMER,
         registrationForm.value.dobYear,
         registrationForm.value.dobMonth,
@@ -50,9 +51,13 @@ export class RegistrationFormComponent implements OnInit {
         registrationForm.value.postalcodeReg,
         registrationForm.value.cityReg);
 
-    console.log("registrationRequest onCompletRegistration" )
-    console.log(registrationRequest);
+    console.log("registrationRequest onCompletRegistration" );
+    console.log("in onCompletRegistration " + registrationRequest);
     this.loginService.registrationUser(registrationRequest);
     this.loginService.makeWelcomeString();
+  }
+
+  encodeString(data: string){
+    return btoa(data);
   }
 }

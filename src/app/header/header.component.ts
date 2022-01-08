@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onProfileView() {
-    this.accountService.validAccountView = true;
+    if (this.loginService.userIsLoggedIn)
     this.accountService.accountViewUser = this.loginService.shopUser;
   }
 }

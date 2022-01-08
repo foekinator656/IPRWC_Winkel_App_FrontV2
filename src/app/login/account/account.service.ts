@@ -9,7 +9,6 @@ import {ApiService} from "../../shared/api.service";
 export class AccountService {
   public errorMessage!: string;
   accountViewUser!: ShopUser;
-  validAccountView: boolean = false;
   changeAddressMode: boolean = false;
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
   constructor(private http: HttpClient, private apiService: ApiService ) { }

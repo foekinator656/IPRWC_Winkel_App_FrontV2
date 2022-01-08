@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {LoginRequest} from "../shared/models/login.request";
 import {ShopUser} from "../shared/models/shop-user.model";
 import {ApiService} from "../shared/api.service";
+import {Router} from "@angular/router";
+import {AccountService} from "./account/account.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class LoginService {
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
   public adminRoles = ["SYS_ADMIN","DATA_ADMIN"];
 
-  constructor(private http: HttpClient, private apiService: ApiService ) { }
+  constructor(private http: HttpClient, private apiService: ApiService,public router: Router, public accountService: AccountService ) { }
 
   loginShopUser(loginRequest: LoginRequest){
 
@@ -27,8 +29,6 @@ export class LoginService {
             this.userIsLoggedIn = true;
             this.makeWelcomeString();
             let currentShopUserRole = this.shopUser.shopUserRole.toString();
-
-
             this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
           },error => {
             console.log(error);
@@ -70,23 +70,30 @@ export class LoginService {
     this.userIsAdmin = false;
   }
 
-  registrationUser(registrationRequest: ShopUser) {
+  async registrationUser(registrationRequest: ShopUser) {
+    let newShopUserSaved = false;
     if (!this.userIsLoggedIn) {
-
+      console.log("voor de post" + registrationRequest);
       this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)
         .subscribe(shopUser => {
-            console.log(shopUser);
-            this.shopUser = shopUser;
-            this.userIsLoggedIn = true;
-            this.makeWelcomeString();
-            let currentShopUserRole = this.shopUser.shopUserRole.toString();
-            console.log(currentShopUserRole)
-            this.userIsAdmin = (this.adminRoles.indexOf(currentShopUserRole) > -1);
-          }, error => {
-            console.log(error);
-            this.errorMessage = error;
-          }
-        );
+          this.shopUser = shopUser;
+          this.accountService.accountViewUser = this.shopUser;
+          this.userIsLoggedIn = true;
+          newShopUserSaved = true;
+          console.log(" newShopUserSaved wordt gezet " + newShopUserSaved);
+          this.makeWelcomeString();
+          let currentShopUserRole = this.shopUser.shopUserRole.toString();
+          this.userIsAdmin = (this.adminRoles.indexOf(currentShopUserRole) > -1);
+        }, error => {
+          console.log(error);
+          this.errorMessage = error;
+        }
+      );
     }
+    while (!newShopUserSaved){
+      await this.delay(100);
+    }
+    this.userIsLoggedIn = true;
+    this.router.navigate(['/','account']);
   }
 }

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="accountService.validAccountView">
+<div class="row" *ngIf="this.loginService.userIsLoggedIn">
   <div class="row">
     <div class="col-md-2 col-md-offset-2">
       Naam:
@@ -81,7 +81,7 @@
 
 
 
-<div  class="row" *ngIf="!accountService.validAccountView">
+<div  class="row" *ngIf="!this.loginService.userIsLoggedIn">
   <div class="col-md-offset-2">
     <p>Er is geen user om weer te geven.</p>
     <br>

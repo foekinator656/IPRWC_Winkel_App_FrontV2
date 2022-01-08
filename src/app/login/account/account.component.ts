@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {AccountService} from "./account.service";
 import {NgForm} from "@angular/forms";
 import {LoginRequest} from "../../shared/models/login.request";
+import {LoginService} from "../login.service";
 
 @Component({
   selector: 'app-account',
@@ -11,7 +12,7 @@ import {LoginRequest} from "../../shared/models/login.request";
 })
 export class AccountComponent implements OnInit {
 
-  constructor(public accountService: AccountService, public router: Router) { }
+  constructor(public accountService: AccountService,public loginService: LoginService, public router: Router) { }
 
   ngOnInit(): void {
   }
