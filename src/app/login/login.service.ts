@@ -5,11 +5,13 @@ import {ShopUser} from "../shared/models/shop-user.model";
 import {ApiService} from "../shared/api.service";
 import {Router} from "@angular/router";
 import {AccountService} from "./account/account.service";
+import {ShopUserAuthResponse} from "../shared/models/ShopUserAuthResponse.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  public jwt: string = "";
   public errorMessage!: string;
   public shopUser!: ShopUser;
   public userIsLoggedIn: boolean = false;
@@ -23,10 +25,12 @@ export class LoginService {
   loginShopUser(loginRequest: LoginRequest){
 
     if (!this.userIsLoggedIn){
-      this.http.post<ShopUser>(this.apiService.apiUrl+'shopuser/login',loginRequest)
-        .subscribe(shopUser => {
-            this.shopUser = shopUser;
+      this.http.post<ShopUserAuthResponse>(this.apiService.apiUrl+'shopuser/login',loginRequest)
+        .subscribe(shopUserAuthResponse => {
+            this.shopUser = shopUserAuthResponse.shopUser;
+            this.jwt = shopUserAuthResponse.jwt;
             this.userIsLoggedIn = true;
+            console.log(shopUserAuthResponse);
             this.makeWelcomeString();
             let currentShopUserRole = this.shopUser.shopUserRole.toString();
             this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
