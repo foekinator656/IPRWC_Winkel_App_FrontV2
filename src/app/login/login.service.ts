@@ -5,7 +5,7 @@ import {ShopUser} from "../shared/models/shop-user.model";
 import {ApiService} from "../shared/api.service";
 import {Router} from "@angular/router";
 import {AccountService} from "./account/account.service";
-import {ShopUserAuthResponse} from "../shared/models/ShopUserAuthResponse.model";
+import {ShopUserAuth} from "../shared/models/ShopUserAuth.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +25,12 @@ export class LoginService {
   loginShopUser(loginRequest: LoginRequest){
 
     if (!this.userIsLoggedIn){
-      this.http.post<ShopUserAuthResponse>(this.apiService.apiUrl+'shopuser/login',loginRequest)
-        .subscribe(shopUserAuthResponse => {
-            this.shopUser = shopUserAuthResponse.shopUser;
-            this.jwt = shopUserAuthResponse.jwt;
+      this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
+        .subscribe(ShopUserAuth => {
+            this.shopUser = ShopUserAuth.shopUser;
+            this.jwt = ShopUserAuth.jwt;
             this.userIsLoggedIn = true;
-            console.log(shopUserAuthResponse);
+            console.log(ShopUserAuth);
             this.makeWelcomeString();
             let currentShopUserRole = this.shopUser.shopUserRole.toString();
             this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
@@ -64,9 +64,10 @@ export class LoginService {
     let newShopUserSaved = false;
     if (!this.userIsLoggedIn) {
       console.log("voor de post" + registrationRequest);
-      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)
-        .subscribe(shopUser => {
-          this.shopUser = shopUser;
+      this.http.post<ShopUserAuth>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)
+        .subscribe(ShopUserAuth => {
+          this.shopUser = ShopUserAuth.shopUser;
+          this.jwt = ShopUserAuth.jwt;
           this.accountService.accountViewUser = this.shopUser;
           this.userIsLoggedIn = true;
           newShopUserSaved = true;

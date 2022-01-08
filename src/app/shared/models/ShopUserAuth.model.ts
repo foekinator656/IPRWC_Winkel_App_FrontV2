@@ -1,6 +1,6 @@
 import {ShopUser} from "./shop-user.model";
 
-export class ShopUserAuthResponse{
+export class ShopUserAuth {
   public jwt: string;
   public shopUser: ShopUser;
 
