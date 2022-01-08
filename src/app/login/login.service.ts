@@ -12,7 +12,6 @@ import {AuthService} from "../shared/auth.service";
   providedIn: 'root'
 })
 export class LoginService {
-  public authUser!: AuthService;
   public errorMessage!: string;
   public userIsLoggedIn: boolean = false;
   public welcomeString: string = "";
@@ -25,7 +24,6 @@ export class LoginService {
               public accountService: AccountService) { }
 
   loginShopUser(loginRequest: LoginRequest){
-
     if (!this.userIsLoggedIn){
       this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
         .subscribe(shopUserAuth => {
