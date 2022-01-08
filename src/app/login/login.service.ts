@@ -11,8 +11,8 @@ import {AccountService} from "./account/account.service";
 })
 export class LoginService {
   public errorMessage!: string;
-  private _shopUser!: ShopUser;
-  private _userIsLoggedIn: boolean = false;
+  public shopUser!: ShopUser;
+  public userIsLoggedIn: boolean = false;
   public welcomeString: string = "";
   public userIsAdmin: boolean = false;
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -36,20 +36,6 @@ export class LoginService {
           }
         );
     }
-  }
-
-  get shopUser(): ShopUser {
-    return this._shopUser;
-  }
-  set shopUser(value: ShopUser) {
-    this._shopUser = value;
-  }
-  get userIsLoggedIn(): boolean {
-    return this._userIsLoggedIn;
-  }
-
-  set userIsLoggedIn(value: boolean) {
-    this._userIsLoggedIn = value;
   }
 
   makeWelcomeString() {
