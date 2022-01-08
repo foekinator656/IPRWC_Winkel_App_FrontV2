@@ -5,6 +5,7 @@ import {ApiService} from "../shared/api.service";
 import {BikeModel} from "../shared/models/bike-model.model";
 import {LoginService} from "../login/login.service";
 import {AuthService} from "../shared/auth.service";
+import {BikeOrderSendRequest} from "../shared/models/bike-order-send-request.model";
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,9 @@ export class OrderService {
     for (let i = 0; i < this.bikesInCart.length; i++) {
       bikeModelIds.push(this.bikesInCart[i].bikeModel.bikeModelId);
     }
+    let sendOrderRequest = new BikeOrderSendRequest(bikeModelIds, this.authService.authenticatedUser);
     let shopUserId: number = this.authService.authenticatedUser.shopUser.shopUserId;
-    this.http.post<number>(this.apiService.apiUrl+'bikeorder/'+shopUserId,bikeModelIds)
+    this.http.post<number>(this.apiService.apiUrl+'bikeorder/'+shopUserId,sendOrderRequest)
       .subscribe(response => {
         this.responseBikeOrderId = response;
         this.sendSuccess = true;
