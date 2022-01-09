@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="alert alert-danger" *ngIf="shopcontentService.errorMessage">
+    <div class="alert alert-danger" *ngIf="shopContentService.errorMessage">
       <p><strong>Probleem met laden van de WinkelInhoud</strong></p>
     </div>
     <app-shop-item
-      *ngFor="let singleBikemodel of shopcontentService.bikeModels"
+      *ngFor="let singleBikemodel of shopContentService.bikeModels"
       [bikeModel]="singleBikemodel"></app-shop-item>
   </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ShopContentService} from "./shop-content.service";
-import {BikeModel} from "../shared/models/bike-model.model";
+import {LoginService} from "../login/login.service";
+import {LoginRequest} from "../shared/models/login.request";
 
 @Component({
   selector: 'app-shop-content',
@@ -9,15 +10,16 @@ import {BikeModel} from "../shared/models/bike-model.model";
   styleUrls: ['./shop-content.component.css']
 })
 export class ShopContentComponent implements OnInit {
-  shopcontentService: ShopContentService;
-  constructor(shopContentService: ShopContentService, private http: HttpClient) {
-    this.shopcontentService = shopContentService;
+  shopContentService: ShopContentService;
+  constructor(shopContentService: ShopContentService, private http: HttpClient,private loginService: LoginService) {
+    this.shopContentService = shopContentService;
   }
 
-  ngOnInit(): void {
-    this.shopcontentService.fetchBikeModels();
-    // this.fetchBikeModels();
-    // TODO clear the list with bikes in the order
+  async ngOnInit(): Promise<void> {
+    // login with guest
+    let loginRequest: LoginRequest = await this.loginService.loginGuestUser();
+    this.shopContentService.fetchBikeModels(loginRequest);
+
   }
 
 }

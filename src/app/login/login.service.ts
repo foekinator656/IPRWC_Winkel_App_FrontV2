@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {AccountService} from "./account/account.service";
 import {ShopUserAuth} from "../shared/models/shop-user-auth.model";
 import {AuthService} from "../shared/auth.service";
+import {ShopUserRole} from "../shared/models/shop-user-role.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +83,36 @@ export class LoginService {
     }
     this.userIsLoggedIn = true;
     this.router.navigate(['/','account']);
+  }
+
+  async loginGuestUser() {
+    let newShopUserSaved = false;
+    let guestEmail: string = "guest@ebiknl.nl";
+    let guestPass: string = "123456";
+    let shopUser: ShopUser = new ShopUser(null,
+      btoa(guestEmail), btoa(guestPass),
+      ShopUserRole.GUEST,
+      1990, 1,1,
+      "gast", "","",
+      "","","123456","");
+    let shopUserAuth: ShopUserAuth = new ShopUserAuth(""
+      ,shopUser)
+    let loginRequest = new LoginRequest(btoa(guestEmail), btoa(guestPass), shopUserAuth);
+    this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
+      .subscribe(shopUserAuth => {
+        console.log(shopUserAuth);
+          newShopUserSaved = true;
+          this.authService.authenticatedUser = shopUserAuth;
+          loginRequest.checkShopUserAuth =shopUserAuth;
+        },error => {
+          console.log(error);
+          this.errorMessage = error;
+        }
+      );
+
+    while (!newShopUserSaved){
+      await this.delay(100);
+    }
+    return loginRequest;
   }
 }
