@@ -48,11 +48,11 @@ export class OrderService {
         console.log(error)
         this.errorMessage = error;
       }));
-    while (this.responseBikeOrderId === undefined){
+    while (!this.sendSuccess) {
       await this.delay(10);
     }
     this.bikesInCart = [];
     this.totalOrderPrice = 0;
-    return  this.responseBikeOrderId;
+    return this.responseBikeOrderId;
   }
 }

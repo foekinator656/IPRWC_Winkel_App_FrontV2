@@ -19,12 +19,8 @@ export class PaymentComponent implements OnInit {
   onPlaceOrder() {
     this.orderService.sendOrder();
   }
+  onBackToShop(){
+    this.router.navigate(['/','shop']);
 
-  checkNoEmptyCart() {
-    if (this.orderService.bikesInCart.length === 0){
-      this.router.navigate(['/','not-found']);
-      return false;
-    }
-    return true;
   }
 }
