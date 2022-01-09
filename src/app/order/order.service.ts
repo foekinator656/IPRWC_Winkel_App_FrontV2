@@ -32,7 +32,6 @@ export class OrderService {
       });
   }
 
-
   deleteBikeFormCart(bikeIndex: number) {
     let bike  = this.bikesInCart[bikeIndex];
     this.bikesInCart.splice(bikeIndex, 1);

@@ -100,7 +100,6 @@ export class LoginService {
     let loginRequest = new LoginRequest(btoa(guestEmail), btoa(guestPass), shopUserAuth);
     this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
       .subscribe(shopUserAuth => {
-        console.log(shopUserAuth);
           newShopUserSaved = true;
           this.authService.authenticatedUser = shopUserAuth;
           loginRequest.checkShopUserAuth =shopUserAuth;

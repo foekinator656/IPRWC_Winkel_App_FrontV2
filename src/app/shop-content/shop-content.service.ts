@@ -18,7 +18,6 @@ export class ShopContentService {
   fetchBikeModels(loginRequest:LoginRequest) {
         this.http.post<BikeModel[]>(this.apiService.apiUrl+'bikemodel',loginRequest)
       .subscribe(bikeModels => {
-        console.log(bikeModels);
         this.bikeModels = bikeModels;
         this.authService.authenticatedUser = loginRequest.checkShopUserAuth;
       }, error => {
