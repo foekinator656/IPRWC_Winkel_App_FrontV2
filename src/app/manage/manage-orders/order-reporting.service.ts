@@ -8,9 +8,8 @@ import {AuthService} from "../../shared/auth.service";
 @Injectable({
   providedIn: 'root'
 })
-export class OrdersService {
+export class OrderReportingService {
 
-  getOrdersDone: boolean = false;
   bikes: Bike[] = [];
   bikeOrders!: BikeOrder[];
   bikeOrderPrices: number[] = [];
@@ -26,11 +25,7 @@ export class OrdersService {
       .subscribe(bikeOrders => {
         this.bikeOrders = [];
         this.bikeOrders = bikeOrders.slice();
-        if (this.bikeOrders.length > 0 ){
-          this.getOrdersDone = true;
-        }
-        console.log(this.bikeOrders);
-        console.log(this.bikeOrders[0].orderId)
+        bikeOrdersReceived = true;
         return bikeOrders;
       }, error => {
         console.log(error);
@@ -47,7 +42,7 @@ export class OrdersService {
   async getPriceForOrder(bikeOrder: BikeOrder){
     let bikesReceived = false;
     let totalprice: number = 0;
-    this.http.get<Bike[]>(this.apiService.apiUrl+'bike/bikeOrder/'+bikeOrder.orderId)
+    this.http.post<Bike[]>(this.apiService.apiUrl+'bike/bikeOrder/'+bikeOrder.orderId,this.authService.authenticatedUser)
       .subscribe(bikesAPI => {
         this.bikes = bikesAPI;
         bikesReceived = true;
