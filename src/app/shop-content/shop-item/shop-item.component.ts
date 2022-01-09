@@ -17,7 +17,7 @@ export class ShopItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddToCart(bikeModelId: number) {
-    this.orderService.addBikeModelToCart(bikeModelId);
+  onAddToCart(bikeModel: BikeModel) {
+    this.orderService.addBikeModelToCart(bikeModel);
   }
 }

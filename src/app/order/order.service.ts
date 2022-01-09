@@ -22,14 +22,10 @@ export class OrderService {
   constructor(private http: HttpClient,private apiService: ApiService, public authService: AuthService) { }
 
 
-  addBikeModelToCart(bikeModelId: number) {
-    this.http.get<BikeModel>(this.apiService.apiUrl+'bikemodel/'+bikeModelId)
-      .subscribe(bikeModel => {
-        console.log(bikeModel);
-        let bike = new Bike(bikeModel.bikeModelName, bikeModel, bikeModel.priceOfTheDay, true, false);
-        this.bikesInCart.push(bike);
-        this.totalOrderPrice += bike.price;
-      });
+  addBikeModelToCart(bikeModel: BikeModel) {
+    let bike = new Bike(bikeModel.bikeModelName, bikeModel, bikeModel.priceOfTheDay, true, false);
+    this.bikesInCart.push(bike);
+    this.totalOrderPrice += bike.price;
   }
 
   deleteBikeFormCart(bikeIndex: number) {
