@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {OrdersService} from "../orders.service";
+import {OrderReportingService} from "../order-reporting.service";
 import {BikeOrder} from "../../../shared/models/bike-order.model";
 
 @Component({
@@ -11,7 +11,7 @@ export class OrderListItemComponent implements OnInit {
   @Input("bikeOrder")       bikeOrder!: BikeOrder;
   @Input("bikeOrderPrice")  bikeOrderPrice!:  number;
 
-  constructor(public orderService: OrdersService) { }
+  constructor(public orderService: OrderReportingService) { }
 
   ngOnInit(): void {
   }
