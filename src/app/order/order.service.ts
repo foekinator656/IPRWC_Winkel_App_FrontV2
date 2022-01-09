@@ -3,7 +3,6 @@ import {Bike} from "../shared/models/bike.model";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../shared/api.service";
 import {BikeModel} from "../shared/models/bike-model.model";
-import {LoginService} from "../login/login.service";
 import {AuthService} from "../shared/auth.service";
 import {BikeOrderSendRequest} from "../shared/models/bike-order-send-request.model";
 
