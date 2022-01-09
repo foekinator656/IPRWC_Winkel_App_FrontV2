@@ -5,6 +5,7 @@ import {LoginService} from "../login.service";
 import {LoginRequest} from "../../shared/models/login.request";
 import {Router} from "@angular/router";
 import {ShopUserAuth} from "../../shared/models/shop-user-auth.model";
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
   selector: 'app-login-form',
@@ -23,7 +24,7 @@ export class LoginFormComponent implements OnInit {
     //  tijdelijk  ================= KAN WEG
     let email = btoa("SysAdmin@users.com");
     let pass = btoa("sysadmin")
-    let loginRequest = new LoginRequest(email, pass, this.shopUserAuth);
+    let loginRequest = new LoginRequest(email, pass, this.authService.authenticatedUser);
     // let loginRequest = new LoginRequest("customer@users.com", "DataAdmin");
 
     this.loginService.loginShopUser(loginRequest);

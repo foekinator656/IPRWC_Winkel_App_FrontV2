@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../shared/api.service";
 import {LoginRequest} from "../shared/models/login.request";
 import {AuthService} from "../shared/auth.service";
+import {ShopUserAuth} from "../shared/models/shop-user-auth.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,20 @@ export class ShopContentService {
   public errorMessage!: string;
 
   bikeModels: BikeModel[] = [];
+  delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-  constructor(private http: HttpClient,private apiService: ApiService,private authService: AuthService) {}
+  constructor(private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
 
-  fetchBikeModels(loginRequest:LoginRequest) {
-        this.http.post<BikeModel[]>(this.apiService.apiUrl+'bikemodel',loginRequest)
+  async fetchBikeModels() {
+    while (!this.authService.authReceived) {
+      await this.delay(100);
+    }
+     let shopUserAuth: ShopUserAuth =  this.authService.authenticatedUser;
+     let bikeModelsReceived = false;
+        this.http.post<BikeModel[]>(this.apiService.apiUrl+'bikemodel',shopUserAuth)
       .subscribe(bikeModels => {
         this.bikeModels = bikeModels;
-        this.authService.authenticatedUser = loginRequest.checkShopUserAuth;
+        bikeModelsReceived = true;
       }, error => {
         console.log(error);
         this.errorMessage = error;

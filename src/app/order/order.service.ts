@@ -49,7 +49,7 @@ export class OrderService {
         this.errorMessage = error;
       }));
     while (this.responseBikeOrderId === undefined){
-      await this.delay(1000);
+      await this.delay(10);
     }
     this.bikesInCart = [];
     this.totalOrderPrice = 0;

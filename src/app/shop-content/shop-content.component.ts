@@ -15,7 +15,7 @@ export class ShopContentComponent implements OnInit {
     this.shopContentService = shopContentService;
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(){
     // login with guest
     let loginRequest: LoginRequest = await this.loginService.loginGuestUser();
     this.shopContentService.fetchBikeModels(loginRequest);

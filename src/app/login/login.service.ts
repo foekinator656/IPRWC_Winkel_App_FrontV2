@@ -86,6 +86,7 @@ export class LoginService {
   }
 
   async loginGuestUser() {
+
     let newShopUserSaved = false;
     let guestEmail: string = "guest@ebiknl.nl";
     let guestPass: string = "123456";
@@ -95,22 +96,20 @@ export class LoginService {
       1990, 1,1,
       "gast", "","",
       "","","123456","");
-    let shopUserAuth: ShopUserAuth = new ShopUserAuth(""
-      ,shopUser)
+    let shopUserAuth: ShopUserAuth = new ShopUserAuth("",shopUser)
     let loginRequest = new LoginRequest(btoa(guestEmail), btoa(guestPass), shopUserAuth);
     this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
       .subscribe(shopUserAuth => {
           newShopUserSaved = true;
           this.authService.authenticatedUser = shopUserAuth;
-          loginRequest.checkShopUserAuth =shopUserAuth;
+          this.authService.authReceived = true;
         },error => {
           console.log(error);
           this.errorMessage = error;
         }
       );
-
     while (!newShopUserSaved){
-      await this.delay(100);
+      await this.delay(2000);
     }
     return loginRequest;
   }
