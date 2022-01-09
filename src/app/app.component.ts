@@ -9,4 +9,13 @@ import {AuthService} from "./shared/auth.service";
 })
 export class AppComponent implements OnInit{
   title = 'Frontv2';
+
+  constructor(private loginService: LoginService,private authService: AuthService) {
+  }
+
+  async ngOnInit(){
+    await this.loginService.loginGuestUser();
+    this.loginService.userIsLoggedIn = false;
+    this.loginService.userIsAdmin = false;
+  }
 }

@@ -14,7 +14,7 @@ import {AuthService} from "../../shared/auth.service";
 })
 export class LoginFormComponent implements OnInit {
   errorMessage!: string;
-  constructor(public loginService: LoginService, public router: Router,private shopUserAuth: ShopUserAuth) { }
+  constructor(public loginService: LoginService, public router: Router,private authService: AuthService) { }
   ngOnInit(): void {}
 
   onLoginShopUser(loginForm: NgForm) {

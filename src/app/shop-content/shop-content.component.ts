@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {ShopContentService} from "./shop-content.service";
 import {LoginService} from "../login/login.service";
 import {LoginRequest} from "../shared/models/login.request";
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'app-shop-content',
@@ -11,15 +12,13 @@ import {LoginRequest} from "../shared/models/login.request";
 })
 export class ShopContentComponent implements OnInit {
   shopContentService: ShopContentService;
-  constructor(shopContentService: ShopContentService, private http: HttpClient,private loginService: LoginService) {
+  constructor(shopContentService: ShopContentService, private http: HttpClient,private authService: AuthService) {
     this.shopContentService = shopContentService;
   }
 
   ngOnInit(){
     // login with guest
-    let loginRequest: LoginRequest = await this.loginService.loginGuestUser();
-    this.shopContentService.fetchBikeModels(loginRequest);
-
+    this.shopContentService.fetchBikeModels();
   }
 
 }

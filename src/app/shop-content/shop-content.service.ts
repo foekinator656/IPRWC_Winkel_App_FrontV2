@@ -31,6 +31,10 @@ export class ShopContentService {
         console.log(error);
         this.errorMessage = error;
       });
+    while (!bikeModelsReceived){
+      await this.delay(100);
+    }
+
   }
 }
 

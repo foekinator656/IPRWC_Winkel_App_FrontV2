@@ -111,6 +111,5 @@ export class LoginService {
     while (!newShopUserSaved){
       await this.delay(2000);
     }
-    return loginRequest;
   }
 }
