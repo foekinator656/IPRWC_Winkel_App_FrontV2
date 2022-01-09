@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'app-beheer',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage.component.css']
 })
 export class ManageComponent implements OnInit {
-  manageView: boolean = true;
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
-
+  checkUserRoleIsAdmin(){
+    if (this.authService.authenticatedUser.shopUser.shopUserRole.valueOf() == 2 ||
+      this.authService.authenticatedUser.shopUser.shopUserRole.valueOf() == 3){
+      return true;
+    }
+    return false;
+  }
+  checkUserIsCustomer(){
+    if (this.authService.authenticatedUser.shopUser.shopUserRole.valueOf() == 1){
+      return true;
+    }
+    return false;
+  }
 }
