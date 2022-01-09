@@ -20,12 +20,4 @@ export class ShopContentComponent implements OnInit {
     // TODO clear the list with bikes in the order
   }
 
-  // private fetchBikeModels() {
-  //   this.http.get<BikeModel[]>('http://localhost:8080/bikemodel')
-  //     .subscribe(bikeModels => {
-  //       console.log(bikeModels);
-  //         this.shopcontentService.bikeModels = bikeModels;
-  //     });
-  // }
-
 }

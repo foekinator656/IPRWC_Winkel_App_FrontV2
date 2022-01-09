@@ -4,6 +4,7 @@ import {Form} from "@angular/forms";
 import {LoginService} from "../login.service";
 import {LoginRequest} from "../../shared/models/login.request";
 import {Router} from "@angular/router";
+import {ShopUserAuth} from "../../shared/models/shop-user-auth.model";
 
 @Component({
   selector: 'app-login-form',
@@ -11,13 +12,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-
   errorMessage!: string;
-
-  constructor(public loginService: LoginService, public router: Router) { }
-
-  ngOnInit(): void {
-  }
+  constructor(public loginService: LoginService, public router: Router,private shopUserAuth: ShopUserAuth) { }
+  ngOnInit(): void {}
 
   onLoginShopUser(loginForm: NgForm) {
     // if (!loginForm.valid) return;
@@ -32,7 +29,6 @@ export class LoginFormComponent implements OnInit {
     this.loginService.loginShopUser(loginRequest);
     this.loginService.makeWelcomeString();
   }
-
 
   onRegister() {
     this.router.navigate(['/','registration']);

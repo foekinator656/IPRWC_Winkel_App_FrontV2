@@ -7,7 +7,5 @@ import {ShopUserAuth} from "./models/shop-user-auth.model";
 })
 export class AuthService {
   authenticatedUser! : ShopUserAuth;
-
-
   constructor() { }
 }

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BikeModel} from "../shared/models/bike-model.model";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../shared/api.service";
-import {catchError, map, tap} from "rxjs";
+import {LoginRequest} from "../shared/models/login.request";
+import {AuthService} from "../shared/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +13,18 @@ export class ShopContentService {
 
   bikeModels: BikeModel[] = [];
 
-  constructor(private http: HttpClient,private apiService: ApiService) {}
+  constructor(private http: HttpClient,private apiService: ApiService,private authService: AuthService) {}
 
-  fetchBikeModels() {
-
-
-    this.http.get<BikeModel[]>(this.apiService.apiUrl+'bikemodel')
+  fetchBikeModels(loginRequest:LoginRequest) {
+        this.http.post<BikeModel[]>(this.apiService.apiUrl+'bikemodel',loginRequest)
       .subscribe(bikeModels => {
         console.log(bikeModels);
         this.bikeModels = bikeModels;
+        this.authService.authenticatedUser = loginRequest.checkShopUserAuth;
       }, error => {
         console.log(error);
         this.errorMessage = error;
       });
   }
-
-  setBikeModels(bikeModels: BikeModel[])
-    {
-      this.bikeModels = bikeModels;
-    }
 }
 
