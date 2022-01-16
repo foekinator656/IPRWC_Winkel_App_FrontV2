@@ -16,6 +16,7 @@ import {RegisterRequest} from "../shared/models/register-request.model";
 export class LoginService {
   public errorMessage!: string;
   public userIsLoggedIn: boolean = false;
+  public loginComplete: boolean = false;
   public welcomeString: string = "";
   public userIsAdmin: boolean = false;
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -27,7 +28,6 @@ export class LoginService {
 
   async loginShopUser(loginRequest: LoginRequest){
     if (!this.userIsLoggedIn){
-
       this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
         .subscribe(shopUserAuth => {
             this.authService.authenticatedUser = shopUserAuth;
@@ -38,13 +38,13 @@ export class LoginService {
           }
         );
       while (!this.userIsLoggedIn){
-        await this.delay(100);
+        await this.delay(10);
       }
-
       await this.accountService.getShopUserViewByEmail(this.authService.authenticatedUser.shopUserEmail);
       this.authService.authenticatedUserView =  this.accountService.accountViewUser;
       let currentShopUserRole = this.authService.authenticatedUserView.shopUserRole.toString();
       this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
+      this.loginComplete = true;
       this.makeWelcomeString();
       this.errorMessage = "";
     }
@@ -69,6 +69,7 @@ export class LoginService {
     this.userIsAdmin = false;
     this.errorMessage = "";
     this.loginGuestUser();
+    this.loginComplete = false;
   }
 
   async registrationUser(registrationRequest: RegisterRequest) {

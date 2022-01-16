@@ -1,7 +1,7 @@
 <div *ngIf="!loginService.userIsLoggedIn" class="row">
   <app-login-form></app-login-form>
 </div>
-<div *ngIf="loginService.userIsLoggedIn" class="row" style="text-align: center">
+<div *ngIf="loginService.loginComplete" class="row" style="text-align: center">
   <div class="alert alert-success" *ngIf="!loginService.errorMessage">
     <p>Welkom terug {{this.authService.authenticatedUserView.firstName}}!</p>
   </div>
