@@ -58,7 +58,7 @@ export class LoginService {
     this.userIsLoggedIn = false;
     this.makeWelcomeString();
     this.userIsAdmin = false;
-    this.authService.authenticatedUser.jwt = "";
+    // this.authService.authenticatedUser.jwt = "";
   }
 
   async registrationUser(registrationRequest: ShopUser) {
