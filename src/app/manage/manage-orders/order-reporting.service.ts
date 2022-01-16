@@ -21,7 +21,7 @@ export class OrderReportingService {
 
   async fetchBikeOrders() {
     let bikeOrdersReceived = false;
-    this.http.post<BikeOrder[]>(this.apiService.apiUrl+'bikeorder',this.authService.authenticatedUser)
+    this.http.post<BikeOrder[]>(this.apiService.apiUrl+'bikeOrder',this.authService.authenticatedUser)
       .subscribe(bikeOrders => {
         this.bikeOrders = [];
         this.bikeOrders = bikeOrders.slice();

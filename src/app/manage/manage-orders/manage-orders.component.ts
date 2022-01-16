@@ -15,14 +15,6 @@ export class ManageOrdersComponent implements OnInit {
   constructor(public manageService: ManageService, public orderReportingService: OrderReportingService, public loginService: LoginService, public router: Router) { }
 
   ngOnInit(): void {
-    this.orderService.fetchBikeOrders();
-  }
-
-  checkIfUserIsAdmin() {
-    if (!this.loginService.userIsAdmin){
-      this.router.navigate(['/','not-found']);
-      return false;
-    }
-    return true;
+    this.orderReportingService.fetchBikeOrders();
   }
 }

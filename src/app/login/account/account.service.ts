@@ -32,7 +32,7 @@ export class AccountService {
       let shopUserView = this.accountViewUser;
       let shopUserId = shopUserView.shopUserId;
 
-      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
+      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopUser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
         .subscribe(shopUser => {
           console.log(shopUser);
           this.accountViewUser = shopUser;
@@ -50,7 +50,7 @@ export class AccountService {
 
   async getShopUserViewByEmail(shopUserEmail: string) {
     let shopUserViewReceived = false;
-    this.http.post<ShopUserView>(this.apiService.apiUrl + 'shopuser/mail/'+shopUserEmail, this.authService.authenticatedUser)
+    this.http.post<ShopUserView>(this.apiService.apiUrl + 'shopUser/mail/'+shopUserEmail, this.authService.authenticatedUser)
       .subscribe(shopUserView => {
           console.log(shopUserView);
           this.accountViewUser = shopUserView;

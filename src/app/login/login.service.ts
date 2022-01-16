@@ -28,7 +28,7 @@ export class LoginService {
 
   async loginShopUser(loginRequest: LoginRequest){
     if (!this.userIsLoggedIn){
-      this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
+      this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopUser/login',loginRequest)
         .subscribe(shopUserAuth => {
             this.authService.authenticatedUser = shopUserAuth;
             this.userIsLoggedIn = true;
@@ -113,7 +113,7 @@ export class LoginService {
       "","","123456","");
     let shopUserAuth: ShopUserAuth = new ShopUserAuth("",shopUser.shopUserEmail);
     let loginRequest = new LoginRequest(btoa(guestEmail), btoa(guestPass), shopUserAuth);
-    this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
+    this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopUser/login',loginRequest)
       .subscribe(shopUserAuth => {
           newShopUserSaved = true;
           this.authService.authenticatedUser = shopUserAuth;

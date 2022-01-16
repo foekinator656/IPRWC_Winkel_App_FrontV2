@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../shared/auth.service";
+import {Router} from "@angular/router";
+import {ManageService} from "./manage.service";
 
 @Component({
   selector: 'app-beheer',
@@ -7,22 +9,18 @@ import {AuthService} from "../shared/auth.service";
   styleUrls: ['./manage.component.css']
 })
 export class ManageComponent implements OnInit {
-  constructor(private authService: AuthService) { }
+  public showUserToggle: boolean = false;
+  public showOrdersToggle: boolean = false;
+
+  constructor(public manageService: ManageService, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
-  checkUserRoleIsAdmin(){
-    if (this.authService.authenticatedUserView.shopUserRole.valueOf() == 2 ||
-      this.authService.authenticatedUserView.shopUserRole.valueOf() == 3){
-      return true;
-    }
-    return false;
-  }
-  checkUserIsCustomer(){
-    if (this.authService.authenticatedUserView.shopUserRole.valueOf() == 1){
-      return true;
-    }
-    return false;
+
+
+  onShowUserToggle() {
+    this.showUserToggle = !this.showUserToggle;
+
   }
 
   onShowOrdersToggle() {
