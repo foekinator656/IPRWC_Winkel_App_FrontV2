@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
 
   onLoginShopUser(loginForm: NgForm) {
     // if (!loginForm.valid) return;
-    // let loginRequest = new LoginRequest(loginForm.value.email, loginForm.value.password);
+    // let loginRequest = new LoginRequest( btoa(loginForm.value.email),  btoa(loginForm.value.password), this.authService.authenticatedUser);
 
     //  tijdelijk  ================= KAN WEG
     let email = btoa("SysAdmin@users.com");

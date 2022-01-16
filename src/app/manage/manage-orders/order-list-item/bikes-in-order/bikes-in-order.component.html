@@ -1,0 +1,23 @@
+<a
+  style="cursor: pointer;"
+  class="list-group-item clearfix">
+  <div class="list-group-item-heading">
+    <div class="row">
+      <div class="col-xs-2">
+        {{bikeInOrder.bikeName}}
+      </div>
+      <div class="col-xs-2" >
+        {{bikeInOrder.price}}
+      </div>
+
+      <div class="col-xs-2">
+
+          <img
+            [src]="bikeInOrder.bikeModel.photoUrl"
+            alt="{{ bikeInOrder.bikeModel.bikeModelName }}"
+            class="img-responsive"
+            style="max-height: 200px;">
+      </div>
+    </div>
+  </div>
+</a>

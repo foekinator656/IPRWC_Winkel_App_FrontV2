@@ -6,12 +6,12 @@
     <h1>Om bestellingen te plaatsen moet u inloggen!</h1>
     <form #loginForm="ngForm" (ngSubmit)="onLoginShopUser(loginForm)">
       <div class="form-group">
-        <label for="email">EMail</label>
-        <input type="email" id="email" class="form-control" ngModel name="email" required email>
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="gast@gast.com" ngModel name="email" required email>
       </div>
       <div class="form-group">
         <label for="password">Wachtwoord</label>
-        <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6">
+        <input type="password" id="password" class="form-control" placeholder="Wachtwoord2021!" ngModel name="password" required minlength="6">
       </div>
       <div>
         <!--        <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">-->

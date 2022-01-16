@@ -20,7 +20,7 @@
       Geboorte datum:
     </div>
     <div class="col-md-5">
-      <p>{{accountService.accountViewUser.dayOfBirth}}  {{accountService.accountViewUser.monthOfBirth}} {{accountService.accountViewUser.yearOfBirth}}</p>
+      <p>{{accountService.accountViewUser.dayOfBirth}}-{{accountService.accountViewUser.monthOfBirth}}-{{accountService.accountViewUser.yearOfBirth}}</p>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
       Adres:
     </div>
     <div class="col-md-5">
-      <p>{{accountService.accountViewUser.street}} {{accountService.accountViewUser.houseNr}} <br> {{accountService.accountViewUser.postalCode}}, {{accountService.accountViewUser.city}}</p>
+      <p>{{accountService.accountViewUser.street}} {{accountService.accountViewUser.houseNr}}, <br> {{accountService.accountViewUser.postalCode}}, {{accountService.accountViewUser.city}}</p>
     </div>
     <div class="col-md-3">
       <button class="btn btn-primary" (click)="OnChangeAddress()">Wijzig adres</button>

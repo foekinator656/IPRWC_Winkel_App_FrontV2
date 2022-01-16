@@ -8,8 +8,6 @@ export class Bike {
   public bikeInStock: boolean;
   public bikeIsSold: boolean
 
-
-
   constructor(bikeName: string, bikeModel: BikeModel, price: number, bikeInStock: boolean, bikeIsSold: boolean) {
     this.bikeName = bikeName;
     this.bikeModel = bikeModel;

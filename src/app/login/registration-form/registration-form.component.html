@@ -8,41 +8,41 @@
     <form #registrationForm="ngForm" (ngSubmit)="onCompletRegistration(registrationForm)">
       <div class="form-group">
         <label for="firstNameReg">Voornaam:</label>
-        <input type="text" id="firstNameReg" class="form-control" ngModel name="firstNameReg" required>
+        <input type="text" id="firstNameReg" class="form-control" placeholder="Pietje" ngModel name="firstNameReg" required>
       </div>
       <div class="form-group">
-        <label for="middleNameReg">tussenvoegsel:</label>
-        <input type="text" id="middleNameReg" class="form-control" ngModel name="middleNameReg">
+        <label for="middleNameReg">Tussenvoegsel:</label>
+        <input type="text" id="middleNameReg" class="form-control" placeholder="van" ngModel name="middleNameReg">
       </div>
       <div class="form-group">
         <label for="lastNameReg">Achternaam:</label>
-        <input type="text" id="lastNameReg" class="form-control" ngModel name="lastNameReg" required>
+        <input type="text" id="lastNameReg" class="form-control" placeholder="Fietsenland" ngModel name="lastNameReg" required>
       </div>
       <div class="row">
         <div class="col-md-9">
           <div class="form-group">
             <label for="streetReg">Straat:</label>
-            <input type="text" id="streetReg" class="form-control" ngModel name="streetReg" required>
+            <input type="text" id="streetReg" class="form-control" placeholder="Dellaertweg" ngModel name="streetReg" required>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             <label for="houseNrReg">Huisnummer:</label>
-            <input type="text" id="houseNrReg" class="form-control" ngModel name="houseNrReg" required>
+            <input type="text" id="houseNrReg" class="form-control" placeholder="1" ngModel name="houseNrReg" required>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="form-group">
             <label for="postalcodeReg">Postcode:</label>
-            <input type="text" id="postalcodeReg" class="form-control" ngModel name="postalcodeReg" minlength="6" maxlength="6" required>
+            <input type="text" id="postalcodeReg" class="form-control" placeholder="2316WZ" ngModel name="postalcodeReg" minlength="6" maxlength="6" required>
           </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
           <div class="form-group">
             <label for="cityReg">Plaats:</label>
-            <input type="text" id="cityReg" class="form-control" ngModel name="cityReg" required>
+            <input type="text" id="cityReg" class="form-control" placeholder="Leiden" ngModel name="cityReg" required>
           </div>
         </div>
       </div>
@@ -50,30 +50,30 @@
         <!--          <p> voer je geboortedatum in: <strong> (Alleen nummers!) </strong> </p>-->
         <div class="col-md-4">
           <div class="form-group">
-            <label for="dobDay">dag</label>
-            <input type="number" id="dobDay" class="form-control" ngModel name="dobDay" min="1" max="31">
+            <label for="dobDay">Dag</label>
+            <input type="number" id="dobDay" class="form-control" placeholder="01" ngModel name="dobDay" min="1" minlength="2" max="31" maxlength="2">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
-            <label for="dobMonth">maand</label>
-            <input type="number" id="dobMonth" class="form-control" ngModel name="dobMonth" min="1" max="12">
+            <label for="dobMonth">Maand</label>
+            <input type="number" id="dobMonth" class="form-control" placeholder="01" ngModel name="dobMonth" min="1" minlength="2" max="12" maxlength="2">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
-            <label for="dobYear">jaar</label>
-            <input type="number" id="dobYear" class="form-control" ngModel name="dobYear" min="1900" max="2050">
+            <label for="dobYear">Jaar</label>
+            <input type="number" id="dobYear" class="form-control" placeholder="1990" ngModel name="dobYear" min="1900" minlength="4" max="2050" maxlength="4">
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="emailReg">EMail:</label>
-        <input type="email" id="emailReg" class="form-control" ngModel name="emailReg" required>
+        <label for="emailReg">Email:</label>
+        <input type="email" id="emailReg" class="form-control" placeholder="Pietje@Ebikes.nl" ngModel name="emailReg" required>
       </div>
       <div class="form-group">
         <label for="passwordReg">Wachtwoord:</label>
-        <input type="password" id="passwordReg" class="form-control" ngModel name="passwordReg" minlength="6" required>
+        <input type="password" id="passwordReg" class="form-control" placeholder="123456" ngModel name="passwordReg" minlength="6" required>
       </div>
       <div>
         <button class="btn btn-primary pull-right"  type="submit" [disabled]="!registrationForm.valid">
