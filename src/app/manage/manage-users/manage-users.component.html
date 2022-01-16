@@ -1,13 +1,13 @@
-<!--<div class="row" *ngIf="checkIfUserIsAdmin()">-->
-<!--  <div class="col-xs-12">-->
-<!--    <div class="alert alert-danger" *ngIf="this.orderService.errorMessage">-->
-<!--      <p><strong>Probleem met laden Orders van de database</strong></p>-->
-<!--    </div>-->
-<!--    <app-order-list-item-->
-<!--      *ngFor="let singleOrder of this.orderService.bikeOrders; let i = index"-->
-<!--      [bikeOrder]="singleOrder"-->
-<!--      [bikeOrderPrice] = "this.orderService.bikeOrderPrices[i]"-->
-<!--      [bikesInOrder] = "this.orderService.getBikesForOrder(singleOrder)"-->
-<!--    ></app-order-list-item>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="row" *ngIf="this.manageService.checkIfUserIsAdmin()">
+  <div *ngIf="userReportingService.shopUserViewsReceived">
+    <div class="col-xs-12">
+      <div class="alert alert-danger" *ngIf="this.userReportingService.errorMessage">
+        <p><strong>Probleem met laden user van de database</strong></p>
+      </div>
+      <app-user-list-item
+        *ngFor="let singleUserView of this.userReportingService.shopUserViews; let shopUserIndex = index"
+        [shopUserView]="singleUserView"
+        [shopUserIndex]="shopUserIndex"></app-user-list-item>
+    </div>
+  </div>
+</div>

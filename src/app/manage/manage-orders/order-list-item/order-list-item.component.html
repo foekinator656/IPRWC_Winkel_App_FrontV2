@@ -4,24 +4,14 @@
   <div class="list-group-item-heading">
     <div class="row">
       <div class="col-xs-2">
-        {{bikeOrder.orderId}}
+       Order ID: {{bikeOrder.orderId}}
       </div>
-      <div class="col-xs-2" >
-<!--        {{bikeOrder.shopUser.firstName}}{{bikeOrder.shopUser.middleName.length === 0 ? "" : " " + bikeOrder.shopUser.middleName}} {{bikeOrder.shopUser.lastName}}-->
+      <div class="col-xs-2">
+       &euro; {{bikeOrderPrice}}
       </div>
-      <div>
-        {{bikeOrderPrice}}
+      <div class="col-xs-2">
+        {{bikeOrder.bikeOrderStatus}}
       </div>
-      <div class="col-xs-6">
-<!--            <button class="btn btn-primary btn-success" (click)=onShowBikes(bikeOrder) >Bikes in Order</button> |-->
-            <button class="btn btn-primary btn-danger" (click)=onDeleteOrder(bikeOrder) >Bikes in Order</button>
-      </div>
-<!--      <div *ngIf="this.bikesInOrder.length > 0">-->
-<!--        <app-bikes-in-order *ngFor="let singleBikeInOrder of this.bikesInOrder"-->
-<!--                            [bikeInOrder]="singleBikeInOrder"-->
-<!--                            ></app-bikes-in-order>-->
-<!--      </div>-->
-
     </div>
   </div>
 </a>

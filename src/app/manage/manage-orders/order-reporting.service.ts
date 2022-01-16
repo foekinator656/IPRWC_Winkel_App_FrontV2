@@ -60,9 +60,9 @@ export class OrderReportingService {
   }
 
   deleteBikeOrder(orderId: number) {
-    this.http.post<BikeOrder>(this.apiService.apiUrl+'/delete/'+orderId,this.authService.authenticatedUser)
-      .subscribe(deletedBikeorder => {
-        console.log(deletedBikeorder);
+    this.http.post<BikeOrder>(this.apiService.apiUrl+'bikeOrder/delete/'+orderId,this.authService.authenticatedUser)
+      .subscribe(deletedBikeOrder => {
+        console.log(deletedBikeOrder);
       }, error => {
         console.log(error);
       })

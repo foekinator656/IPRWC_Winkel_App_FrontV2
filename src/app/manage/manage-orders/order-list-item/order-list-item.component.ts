@@ -11,13 +11,12 @@ export class OrderListItemComponent implements OnInit {
   @Input("bikeOrder")       bikeOrder!: BikeOrder;
   @Input("bikeOrderPrice")  bikeOrderPrice!:  number;
 
-  constructor(public orderService: OrderReportingService) { }
+  constructor(public orderReportingService: OrderReportingService) { }
 
   ngOnInit(): void {
   }
 
   onDeleteOrder(bikeOrder: BikeOrder) {
-    this.orderService.deleteBikeOrder(bikeOrder.orderId);
-
+    this.orderReportingService.deleteBikeOrder(bikeOrder.orderId);
   }
 }

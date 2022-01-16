@@ -1,0 +1,20 @@
+<a
+  style="cursor: pointer;"
+  class="list-group-item clearfix">
+  <div class="list-group-item-heading">
+    <div class="row">
+      <div class="col-xs-2">
+        <p>{{shopUserView.shopUserId}}</p>
+      </div>
+      <div class="col-xs-2">
+        <p>{{shopUserView.firstName}}  {{shopUserView.middleName}} {{shopUserView.lastName}}</p>
+      </div>
+      <div class="col-xs-2">
+       <p> {{shopUserMail}} </p>
+      </div>
+      <div class="col-xs-2">
+        <button class="btn btn-danger" (click)="onDeleteShopUser()">Delete ShopUser</button>
+      </div>
+    </div>
+  </div>
+</a>

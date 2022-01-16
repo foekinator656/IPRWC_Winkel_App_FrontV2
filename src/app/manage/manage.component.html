@@ -1,9 +1,20 @@
-<div class="row">
-<!--  <div *ngIf="checkUserIsCustomer()">-->
-<!--    <app-manage-orders></app-manage-orders>-->
-<!--  </div>-->
-<!--  <div *ngIf="checkUserRoleIsAdmin()">-->
+<div *ngIf="this.manageService.checkIfUserIsAdmin()">
+  <div class="row">
+    <div class="col-xs-3">
+    <button class="btn btn-primary" (click)="onShowUserToggle()">
+      {{showUserToggle ? "Verberg users" : "Geef users weer" }}
+    </button>
+    </div>
+    <div class="col-xs-3">
+      <button class="btn btn-primary" (click)="onShowOrdersToggle()">
+        {{showOrdersToggle ? "Verberg orders" : "Geef orders weer" }}
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngIf="showUserToggle">
+    <app-manage-users></app-manage-users>
+  </div>
+  <div *ngIf="showOrdersToggle">
     <app-manage-orders></app-manage-orders>
-<!--  </div>-->
-
+  </div>
 </div>

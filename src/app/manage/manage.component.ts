@@ -24,4 +24,8 @@ export class ManageComponent implements OnInit {
     }
     return false;
   }
+
+  onShowOrdersToggle() {
+    this.showOrdersToggle = !this.showOrdersToggle;
+  }
 }

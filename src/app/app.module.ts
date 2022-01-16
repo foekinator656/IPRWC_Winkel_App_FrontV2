@@ -23,6 +23,7 @@ import { ManageOrdersComponent } from './manage/manage-orders/manage-orders.comp
 import { AccountComponent } from './login/account/account.component';
 import { OrderListItemComponent } from './manage/manage-orders/order-list-item/order-list-item.component';
 import {BikesInOrderComponent} from "./manage/manage-orders/order-list-item/bikes-in-order/bikes-in-order.component";
+import { UserListItemComponent } from './manage/manage-users/user-list-item/user-list-item.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {BikesInOrderComponent} from "./manage/manage-orders/order-list-item/bike
     ManageOrdersComponent,
     AccountComponent,
     OrderListItemComponent,
-    BikesInOrderComponent
+    BikesInOrderComponent,
+    UserListItemComponent
   ],
   imports: [
     BrowserModule,

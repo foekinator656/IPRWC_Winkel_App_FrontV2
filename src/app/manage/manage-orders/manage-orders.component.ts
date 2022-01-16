@@ -3,6 +3,7 @@ import {OrderReportingService} from "./order-reporting.service";
 import {BikeOrder} from "../../shared/models/bike-order.model";
 import {LoginService} from "../../login/login.service";
 import {Router} from "@angular/router";
+import {ManageService} from "../manage.service";
 
 @Component({
   selector: 'app-manage-orders',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class ManageOrdersComponent implements OnInit {
 
-  constructor(public orderService: OrderReportingService, public loginService: LoginService, public router: Router) { }
+  constructor(public manageService: ManageService, public orderReportingService: OrderReportingService, public loginService: LoginService, public router: Router) { }
 
   ngOnInit(): void {
     this.orderService.fetchBikeOrders();
