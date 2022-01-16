@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {ShopUser} from "../../shared/models/shop-user.model";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../shared/api.service";
-import {LoginService} from "../login.service";
-import {ShopUserAuth} from "../../shared/models/shop-user-auth.model";
 import {AuthService} from "../../shared/auth.service";
 import {ShopUserView} from "../../shared/models/shop-user-view.model";
 
@@ -69,7 +67,7 @@ export class AccountService {
 
   }
 
-  getShopUserEmail() {
+  getShopUserEmail(){
     return atob(this.accountViewUser.shopUserEmail);
   }
 

@@ -25,6 +25,6 @@ export class HeaderComponent implements OnInit {
 
   onProfileView() {
     if (this.loginService.userIsLoggedIn)
-    this.accountService.accountViewUser = this.authService.authenticatedUser.shopUser;
+    this.accountService.accountViewUser = this.authService.authenticatedUserView;
   }
 }

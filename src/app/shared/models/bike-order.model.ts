@@ -4,12 +4,12 @@ import {ShopUser} from "./shop-user.model";
 export class BikeOrder{
   public orderId: any;
   public bikeOrderStatus: BikeOrderStatusEnum;
-  public shopUser: ShopUser;
+  public shopUserId: number;
 
 
-  constructor(bikeOrderId: any, bikeOrderStatus: BikeOrderStatusEnum, shopUser: ShopUser) {
+  constructor(bikeOrderId: any, bikeOrderStatus: BikeOrderStatusEnum, shopUserId: number) {
     this.orderId = bikeOrderId;
     this.bikeOrderStatus = bikeOrderStatus;
-    this.shopUser = shopUser;
+    this.shopUserId = shopUserId;
   }
 }

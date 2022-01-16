@@ -4,6 +4,8 @@ import {ShopUser} from "../../shared/models/shop-user.model";
 import {ShopUserRole} from "../../shared/models/shop-user-role.enum";
 import {LoginService} from "../login.service";
 import {Router} from "@angular/router";
+import {RegisterRequest} from "../../shared/models/register-request.model";
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
   selector: 'app-registration-form',
@@ -12,7 +14,7 @@ import {Router} from "@angular/router";
 })
 export class RegistrationFormComponent implements OnInit {
 
-  constructor(public loginService: LoginService) {}
+  constructor(public loginService: LoginService,public authService: AuthService) {}
   ngOnInit(): void {
   }
 
@@ -35,7 +37,7 @@ export class RegistrationFormComponent implements OnInit {
     console.log(" ===== " + registrationForm.value.postalcodeReg);
     console.log(" ===== " + registrationForm.value.cityReg);
 
-    let registrationRequest: ShopUser =
+    let registrationUser: ShopUser =
       new ShopUser(null,
         this.encodeString(registrationForm.value.emailReg),
         this.encodeString(registrationForm.value.passwordReg),
@@ -50,6 +52,8 @@ export class RegistrationFormComponent implements OnInit {
         registrationForm.value.houseNrReg,
         registrationForm.value.postalcodeReg,
         registrationForm.value.cityReg);
+
+    let registrationRequest = new RegisterRequest(registrationUser,this.authService.authenticatedUser);
 
     console.log("registrationRequest onCompletRegistration" );
     console.log("in onCompletRegistration " + registrationRequest);

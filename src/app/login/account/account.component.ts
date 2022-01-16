@@ -17,7 +17,7 @@ export class AccountComponent implements OnInit {
               public router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.accountService.accountViewUser = this.authService.authenticatedUser.shopUser;
+    this.accountService.accountViewUser = this.authService.authenticatedUserView;
   }
 
   OnChangeAddress() {

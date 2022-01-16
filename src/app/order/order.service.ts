@@ -39,7 +39,7 @@ export class OrderService {
       bikeModelIds.push(this.bikesInCart[i].bikeModel.bikeModelId);
     }
     let sendOrderRequest = new BikeOrderSendRequest(bikeModelIds, this.authService.authenticatedUser);
-    let shopUserId: number = this.authService.authenticatedUser.shopUser.shopUserId;
+    let shopUserId: number = this.authService.authenticatedUserView.shopUserId;
     this.http.post<number>(this.apiService.apiUrl+'bikeorder/'+shopUserId,sendOrderRequest)
       .subscribe(response => {
         this.responseBikeOrderId = response;

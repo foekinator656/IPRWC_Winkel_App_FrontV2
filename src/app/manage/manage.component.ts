@@ -12,14 +12,14 @@ export class ManageComponent implements OnInit {
   ngOnInit(): void {
   }
   checkUserRoleIsAdmin(){
-    if (this.authService.authenticatedUser.shopUser.shopUserRole.valueOf() == 2 ||
-      this.authService.authenticatedUser.shopUser.shopUserRole.valueOf() == 3){
+    if (this.authService.authenticatedUserView.shopUserRole.valueOf() == 2 ||
+      this.authService.authenticatedUserView.shopUserRole.valueOf() == 3){
       return true;
     }
     return false;
   }
   checkUserIsCustomer(){
-    if (this.authService.authenticatedUser.shopUser.shopUserRole.valueOf() == 1){
+    if (this.authService.authenticatedUserView.shopUserRole.valueOf() == 1){
       return true;
     }
     return false;

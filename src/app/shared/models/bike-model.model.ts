@@ -1,12 +1,9 @@
-
-
 export class BikeModel {
   public bikeModelId: number;
   public bikeModelName: string;
   public priceOfTheDay: number;
   public minStockCount: number;
   public photoUrl: string;
-
 
   constructor(bikeModelId: number, bikeModelName: string, priceOfTheDay: number, minStockCount: number, photoUrl: string) {
     this.bikeModelId = bikeModelId;
@@ -15,6 +12,4 @@ export class BikeModel {
     this.minStockCount = minStockCount;
     this.photoUrl = photoUrl;
   }
-
-
 }

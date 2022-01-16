@@ -22,13 +22,13 @@ export class LoginFormComponent implements OnInit {
     let loginRequest = new LoginRequest( btoa(loginForm.value.email),  btoa(loginForm.value.password), this.authService.authenticatedUser);
 
     //  tijdelijk  ================= KAN WEG
-    let email = btoa("SysAdmin@users.com");
-    let pass = btoa("sysadmin")
-    let loginRequest = new LoginRequest(email, pass, this.authService.authenticatedUser);
+    // let email = btoa("SysAdmin@users.com");
+    // let pass = btoa("sysadmin")
+    // let loginRequest = new LoginRequest(email, pass, this.authService.authenticatedUser);
     // let loginRequest = new LoginRequest("customer@users.com", "DataAdmin");
 
     this.loginService.loginShopUser(loginRequest);
-    this.loginService.makeWelcomeString();
+    // this.loginService.makeWelcomeString();
   }
 
   onRegister() {

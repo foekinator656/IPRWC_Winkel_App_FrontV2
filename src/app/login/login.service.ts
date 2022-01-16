@@ -8,6 +8,7 @@ import {AccountService} from "./account/account.service";
 import {ShopUserAuth} from "../shared/models/shop-user-auth.model";
 import {AuthService} from "../shared/auth.service";
 import {ShopUserRole} from "../shared/models/shop-user-role.enum";
+import {RegisterRequest} from "../shared/models/register-request.model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +32,6 @@ export class LoginService {
         .subscribe(shopUserAuth => {
             this.authService.authenticatedUser = shopUserAuth;
             this.userIsLoggedIn = true;
-            this.makeWelcomeString();
-            let currentShopUserRole =this.authService.authenticatedUser.shopUser.shopUserRole.toString();
-            this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
           },error => {
             console.log(error);
             this.errorMessage = error;
@@ -69,29 +67,34 @@ export class LoginService {
     this.userIsLoggedIn = false;
     this.makeWelcomeString();
     this.userIsAdmin = false;
-    // this.authService.authenticatedUser.jwt = "";
+    this.errorMessage = "";
+    this.loginGuestUser();
   }
 
-  async registrationUser(registrationRequest: ShopUser) {
+  async registrationUser(registrationRequest: RegisterRequest) {
     let newShopUserSaved = false;
+
     if (!this.userIsLoggedIn) {
-      this.http.post<ShopUserAuth>(this.apiService.apiUrl + 'shopuser/register', registrationRequest)
+      console.log(registrationRequest);
+      this.http.post<ShopUserAuth>(this.apiService.apiUrl + 'shopUser/register', registrationRequest)
         .subscribe(shopUserAuth => {
           this.authService.authenticatedUser = shopUserAuth;
           this.userIsLoggedIn = true;
           newShopUserSaved = true;
           this.makeWelcomeString();
-          let currentShopUserRole = this.authService.authenticatedUser.shopUser.shopUserRole.toString();
-          this.userIsAdmin = (this.adminRoles.indexOf(currentShopUserRole) > -1);
+          // registrated user is always a customer
+          this.userIsAdmin = false;
         }, error => {
           console.log(error);
           this.errorMessage = error;
         }
       );
     }
+
     while (!newShopUserSaved){
       await this.delay(100);
     }
+
     this.userIsLoggedIn = true;
     this.router.navigate(['/','account']);
   }
