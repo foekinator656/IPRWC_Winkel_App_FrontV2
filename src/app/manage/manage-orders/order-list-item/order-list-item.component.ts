@@ -16,4 +16,8 @@ export class OrderListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onDeleteOrder(bikeOrder: BikeOrder) {
+    this.orderService.deleteBikeOrder(bikeOrder.orderId);
+
+  }
 }

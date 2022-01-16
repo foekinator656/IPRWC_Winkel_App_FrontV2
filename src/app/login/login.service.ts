@@ -24,8 +24,9 @@ export class LoginService {
               public router: Router, public authService: AuthService,
               public accountService: AccountService) { }
 
-  loginShopUser(loginRequest: LoginRequest){
+  async loginShopUser(loginRequest: LoginRequest){
     if (!this.userIsLoggedIn){
+
       this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
         .subscribe(shopUserAuth => {
             this.authService.authenticatedUser = shopUserAuth;
@@ -38,12 +39,22 @@ export class LoginService {
             this.errorMessage = error;
           }
         );
+      while (!this.userIsLoggedIn){
+        await this.delay(100);
+      }
+
+      await this.accountService.getShopUserViewByEmail(this.authService.authenticatedUser.shopUserEmail);
+      this.authService.authenticatedUserView =  this.accountService.accountViewUser;
+      let currentShopUserRole = this.authService.authenticatedUserView.shopUserRole.toString();
+      this.userIsAdmin = ( this.adminRoles.indexOf(currentShopUserRole) > -1);
+      this.makeWelcomeString();
+      this.errorMessage = "";
     }
   }
 
   makeWelcomeString() {
     if (this.userIsLoggedIn){
-      let shopUserFirstName = this.authService.authenticatedUser.shopUser.firstName;
+      let shopUserFirstName = this.authService.authenticatedUserView.firstName;
       if (this.userIsAdmin){
         this.welcomeString = "Welkom Beheerder " + shopUserFirstName;
       } else {
@@ -96,7 +107,7 @@ export class LoginService {
       1990, 1,1,
       "gast", "","",
       "","","123456","");
-    let shopUserAuth: ShopUserAuth = new ShopUserAuth("",shopUser)
+    let shopUserAuth: ShopUserAuth = new ShopUserAuth("",shopUser.shopUserEmail);
     let loginRequest = new LoginRequest(btoa(guestEmail), btoa(guestPass), shopUserAuth);
     this.http.post<ShopUserAuth>(this.apiService.apiUrl+'shopuser/login',loginRequest)
       .subscribe(shopUserAuth => {
@@ -109,7 +120,9 @@ export class LoginService {
         }
       );
     while (!newShopUserSaved){
-      await this.delay(2000);
+      await this.delay(100);
     }
+    console.log(" ---- ERROR ----"+ this.errorMessage);
+    console.log(" ---- shopUserAuth ----"+ this.authService.authenticatedUser)
   }
 }

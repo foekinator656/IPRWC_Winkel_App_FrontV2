@@ -4,14 +4,17 @@ import {ShopUserRole} from "../shared/models/shop-user-role.enum";
 import {AccountService} from "../login/account/account.service";
 import {AuthService} from "../shared/auth.service";
 
+
+
+
+const dataAdmin = ShopUserRole.DATA_ADMIN;
+const sysAdmin = ShopUserRole.SYS_ADMIN;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  dataAdmin = ShopUserRole.DATA_ADMIN;
-  sysAdmin = ShopUserRole.SYS_ADMIN;
 
   constructor(public loginService: LoginService, public accountService: AccountService,
               public authService: AuthService) { }

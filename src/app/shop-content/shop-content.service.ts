@@ -23,7 +23,7 @@ export class ShopContentService {
     }
      let shopUserAuth: ShopUserAuth =  this.authService.authenticatedUser;
      let bikeModelsReceived = false;
-        this.http.post<BikeModel[]>(this.apiService.apiUrl+'bikemodel',shopUserAuth)
+        this.http.post<BikeModel[]>(this.apiService.apiUrl+'bikeModel',shopUserAuth)
       .subscribe(bikeModels => {
         this.bikeModels = bikeModels;
         bikeModelsReceived = true;

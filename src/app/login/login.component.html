@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="loginService.userIsLoggedIn" class="row" style="text-align: center">
   <div class="alert alert-success" *ngIf="!loginService.errorMessage">
-    <p>Welkom terug {{this.authService.authenticatedUser.shopUser.firstName}}!</p>
+    <p>Welkom terug {{this.authService.authenticatedUserView.firstName}}!</p>
   </div>
   <h2> Wilt u uitloggen?</h2>
   <button (click)="onLogOut()" class="btn btn-danger btn-lg">Uitloggen</button>

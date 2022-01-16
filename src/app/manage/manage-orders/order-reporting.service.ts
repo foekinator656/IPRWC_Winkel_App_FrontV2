@@ -59,14 +59,12 @@ export class OrderReportingService {
     return totalprice;
   }
 
-  getAllBikes(){
-    this.http.get<Bike[]>(this.apiService.apiUrl+'bike')
-    .subscribe(bikes => {
-      this.bikes = bikes.slice();
-      return bikes;
-    }, error => {
-      console.log(error);
-      this.errorMessage = error;
-    });
+  deleteBikeOrder(orderId: number) {
+    this.http.post<BikeOrder>(this.apiService.apiUrl+'/delete/'+orderId,this.authService.authenticatedUser)
+      .subscribe(deletedBikeorder => {
+        console.log(deletedBikeorder);
+      }, error => {
+        console.log(error);
+      })
   }
 }

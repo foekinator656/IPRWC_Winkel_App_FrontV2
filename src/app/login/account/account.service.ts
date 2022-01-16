@@ -5,6 +5,7 @@ import {ApiService} from "../../shared/api.service";
 import {LoginService} from "../login.service";
 import {ShopUserAuth} from "../../shared/models/shop-user-auth.model";
 import {AuthService} from "../../shared/auth.service";
+import {ShopUserView} from "../../shared/models/shop-user-view.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,13 @@ export class AccountService {
   // public shopUserAuth = new ShopUserAuth(this.authService.jwt, this.authService.shopUser);
   public errorMessage!: string;
   changeAddressMode: boolean = false;
+
+  accountViewUser!: ShopUserView;
+
   delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-  accountViewUser!: ShopUser;
-  constructor(private http: HttpClient, private apiService: ApiService,public authService: AuthService) { }
+
+  constructor(private http: HttpClient,
+              private apiService: ApiService,public authService: AuthService) { }
 
   async changeAddress(street: string, houseNr: string, postalCode:string, city: string) {
     if (this.changeAddressMode) {
@@ -25,8 +30,11 @@ export class AccountService {
       paramsString += "&newCity=" + city;
       // console.log(this.shopUserAuth);
 
-      let shopUserId = this.authService.authenticatedUser.shopUser.shopUserId;
-      this.http.put<ShopUser>(this.apiService.apiUrl + 'shopuser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
+      await this.getShopUserViewByEmail(this.authService.authenticatedUser.shopUserEmail);
+      let shopUserView = this.accountViewUser;
+      let shopUserId = shopUserView.shopUserId;
+
+      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopuser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
         .subscribe(shopUser => {
           console.log(shopUser);
           this.accountViewUser = shopUser;
@@ -42,7 +50,28 @@ export class AccountService {
     }
   }
 
+  async getShopUserViewByEmail(shopUserEmail: string) {
+    let shopUserViewReceived = false;
+    this.http.post<ShopUserView>(this.apiService.apiUrl + 'shopuser/mail/'+shopUserEmail, this.authService.authenticatedUser)
+      .subscribe(shopUserView => {
+          console.log(shopUserView);
+          this.accountViewUser = shopUserView;
+          shopUserViewReceived = true;
+          this.changeAddressMode = false;
+        }, error => {
+          console.log(error);
+          this.errorMessage = error;
+        }
+      );
+    while (!shopUserViewReceived) {
+        await this.delay(100);
+    }
+
+  }
+
   getShopUserEmail() {
     return atob(this.accountViewUser.shopUserEmail);
   }
+
+
 }
