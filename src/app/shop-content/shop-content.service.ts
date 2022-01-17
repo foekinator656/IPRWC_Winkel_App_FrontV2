@@ -27,7 +27,6 @@ export class ShopContentService {
         this.bikeModels = bikeModels;
         bikeModelsReceived = true;
       }, error => {
-        console.log(error);
         this.errorMessage = error;
       });
     while (!bikeModelsReceived){

@@ -55,8 +55,6 @@ export class RegistrationFormComponent implements OnInit {
 
     let registrationRequest = new RegisterRequest(registrationUser,this.authService.authenticatedUser);
 
-    console.log("registrationRequest onCompletRegistration" );
-    console.log("in onCompletRegistration " + registrationRequest);
     this.loginService.registrationUser(registrationRequest);
     this.loginService.makeWelcomeString();
   }

@@ -45,7 +45,6 @@ export class OrderService {
         this.responseBikeOrderId = response;
         this.sendSuccess = true;
       },(error => {
-        console.log(error)
         this.errorMessage = error;
       }));
     while (!this.sendSuccess) {

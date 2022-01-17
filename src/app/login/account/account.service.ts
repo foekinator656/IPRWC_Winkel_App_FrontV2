@@ -26,7 +26,6 @@ export class AccountService {
       paramsString += "&newHouseNr=" + houseNr;
       paramsString += "&newPostalCode=" + postalCode;
       paramsString += "&newCity=" + city;
-      // console.log(this.shopUserAuth);
 
       await this.getShopUserViewByEmail(this.authService.authenticatedUser.shopUserEmail);
       let shopUserView = this.accountViewUser;
@@ -34,11 +33,9 @@ export class AccountService {
 
       this.http.post<ShopUser>(this.apiService.apiUrl + 'shopUser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
         .subscribe(shopUser => {
-          console.log(shopUser);
           this.accountViewUser = shopUser;
           this.changeAddressMode = false;
           }, error => {
-            console.log(error);
             this.errorMessage = error;
           }
         );
@@ -52,12 +49,10 @@ export class AccountService {
     let shopUserViewReceived = false;
     this.http.post<ShopUserView>(this.apiService.apiUrl + 'shopUser/mail/'+shopUserEmail, this.authService.authenticatedUser)
       .subscribe(shopUserView => {
-          console.log(shopUserView);
           this.accountViewUser = shopUserView;
           shopUserViewReceived = true;
           this.changeAddressMode = false;
         }, error => {
-          console.log(error);
           this.errorMessage = error;
         }
       );

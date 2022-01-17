@@ -22,22 +22,17 @@ export class UserReportingService {
   async fetchShopUserViews(){
     this.shopUserViews = [];
 
-    console.log("Worden we aangeropen")
-    // let shopUserViewsReceived = false;
     this.http.post<ShopUserView[]>(this.apiService.apiUrl+'shopUser',this.authService.authenticatedUser)
       .subscribe(shopUserViews => {
-        console.log(shopUserViews)
         this.shopUserViews = shopUserViews;
         this.shopUserViewsReceived = true;
         return shopUserViews;
       }, error => {
-        console.log(error);
         this.errorMessage = error;
       });
     while (!this.shopUserViewsReceived) {
       await this.delay(10);
     }
-    console.log(this.shopUserViews);
   }
 
   async deleteShopUser(shopUserIndex: number) {
@@ -49,7 +44,6 @@ export class UserReportingService {
       .subscribe(deleteShopUser => {
         shopUserDeleted = true;
       }, error => {
-        console.log(error);
         this.errorMessage = error;
       });
     while (!shopUserDeleted) {
@@ -57,6 +51,5 @@ export class UserReportingService {
     }
     await this.fetchShopUserViews();
 
-    console.log(shopUserDeleted);
   }
 }

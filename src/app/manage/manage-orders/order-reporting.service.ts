@@ -28,7 +28,6 @@ export class OrderReportingService {
         bikeOrdersReceived = true;
         return bikeOrders;
       }, error => {
-        console.log(error);
         this.errorMessage = error;
       });
     while (!bikeOrdersReceived) {
@@ -47,7 +46,6 @@ export class OrderReportingService {
         this.bikes = bikesAPI;
         bikesReceived = true;
       }, error => {
-        console.log(error);
         this.errorMessage = error;
       });
     while (!bikesReceived) {
@@ -62,9 +60,8 @@ export class OrderReportingService {
   deleteBikeOrder(orderId: number) {
     this.http.post<BikeOrder>(this.apiService.apiUrl+'bikeOrder/delete/'+orderId,this.authService.authenticatedUser)
       .subscribe(deletedBikeOrder => {
-        console.log(deletedBikeOrder);
       }, error => {
-        console.log(error);
+        this.errorMessage = error;
       })
   }
 }
