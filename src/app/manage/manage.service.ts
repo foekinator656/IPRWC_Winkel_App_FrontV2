@@ -11,7 +11,6 @@ export class ManageService {
   constructor(public authService: AuthService, public router: Router, public loginService: LoginService) { }
 
   checkIfUserIsAdmin(){
-
     if (this.loginService.userIsAdmin){
       return true;
     }

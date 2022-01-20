@@ -8,6 +8,8 @@ import {ActivatedRoute, Data} from '@angular/router';
 })
 export class ErrorPageComponent implements OnInit {
   errorMessage!: string;
+  delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+  pickedPhoto!: string;
 
   errorPhotos: string[] = [
     "assets/404Photos/error_01.webp",
@@ -26,10 +28,11 @@ export class ErrorPageComponent implements OnInit {
         this.pickedPhoto = this.randomErrorPhoto();
       }
     );
+
   }
 
   public randomErrorPhoto() {
-    let randomIndex = Math.floor(Math.random() * this.errorPhotos.length);
+    let randomIndex = Math.floor(Math.random() * (this.errorPhotos.length-1));
     return this.errorPhotos[randomIndex];
   }
 }

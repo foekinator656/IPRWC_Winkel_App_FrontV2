@@ -63,7 +63,6 @@ export class AccountService {
     while (!shopUserViewReceived) {
         await this.delay(100);
     }
-
   }
 
   getShopUserEmail(){

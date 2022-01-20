@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ShopUserView} from "../../../shared/models/shop-user-view.model";
 import {UserReportingService} from "../user-reporting.service";
+import {AuthService} from "../../../shared/auth.service";
 
 @Component({
   selector: 'app-user-list-item',
@@ -14,7 +15,7 @@ export class UserListItemComponent implements OnInit {
 
   shopUserMail!: string;
 
-  constructor(public userReportingService: UserReportingService) { }
+  constructor(public userReportingService: UserReportingService,public authService: AuthService) { }
 
   ngOnInit(): void {
       this.shopUserMail = atob(this.shopUserView.shopUserEmail);
@@ -23,4 +24,5 @@ export class UserListItemComponent implements OnInit {
   onDeleteShopUser() {
     this.userReportingService.deleteShopUser(this.shopUserIndex);
   }
+
 }

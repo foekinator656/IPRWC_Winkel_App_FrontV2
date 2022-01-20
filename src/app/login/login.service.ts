@@ -33,7 +33,6 @@ export class LoginService {
             this.authService.authenticatedUser = shopUserAuth;
             this.userIsLoggedIn = true;
           },error => {
-            console.log(error);
             this.errorMessage = error;
           }
         );
@@ -74,7 +73,7 @@ export class LoginService {
 
   async registrationUser(registrationRequest: RegisterRequest) {
     let newShopUserSaved = false;
-
+    console.log(registrationRequest);
     if (!this.userIsLoggedIn) {
       this.http.post<ShopUserAuth>(this.apiService.apiUrl + 'shopUser/register', registrationRequest)
         .subscribe(shopUserAuth => {
@@ -83,10 +82,16 @@ export class LoginService {
           newShopUserSaved = true;
           // registrated user is always a customer
           this.userIsAdmin = false;
+          this.loginComplete = true;
         }, error => {
           this.errorMessage = error;
         }
       );
+      while (!newShopUserSaved){
+        await this.delay(100);
+      }
+      await this.accountService.getShopUserViewByEmail(registrationRequest.shopUser.shopUserEmail);
+      this.makeWelcomeString();
     }
 
 
@@ -114,7 +119,6 @@ export class LoginService {
           this.authService.authenticatedUser = shopUserAuth;
           this.authService.authReceived = true;
         },error => {
-          console.log(error);
           this.errorMessage = error;
         }
       );

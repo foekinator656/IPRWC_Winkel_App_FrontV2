@@ -24,18 +24,6 @@ export class RegistrationFormComponent implements OnInit {
     console.log(registrationForm.value.dob);
     let dobDate = new Date(registrationForm.value.dob);
     let dobString = dobDate.toString();
-    console.log(" ===== " + dobString);
-    console.log(" ===== " + registrationForm.value.emailReg);
-    console.log(" ===== " + registrationForm.value.passwordReg);
-    console.log(" ===== " + registrationForm.value.dobYear);
-    console.log(" ===== " + registrationForm.value.dobMonth);
-    console.log(" ===== " + registrationForm.value.dobDay);
-    console.log(" ===== " + registrationForm.value.firstNameReg);
-    console.log(" ===== " + registrationForm.value.middleNameReg);
-    console.log(" ===== " + registrationForm.value.lastNameReg);
-    console.log(" ===== " + registrationForm.value.streetReg);
-    console.log(" ===== " + registrationForm.value.postalcodeReg);
-    console.log(" ===== " + registrationForm.value.cityReg);
 
     let registrationUser: ShopUser =
       new ShopUser(null,

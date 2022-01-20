@@ -1,4 +1,4 @@
-<div class="row" *ngIf="this.manageService.checkIfUserIsAdmin()">
+<div class="row" *ngIf="this.manageService.checkIfUserIsAdmin()" xmlns="http://www.w3.org/1999/html">
   <div *ngIf="userReportingService.shopUserViewsReceived">
     <div class="col-xs-12">
       <div class="alert alert-danger" *ngIf="this.userReportingService.errorMessage">

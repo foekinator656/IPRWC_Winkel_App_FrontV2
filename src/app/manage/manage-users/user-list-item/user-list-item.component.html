@@ -12,7 +12,7 @@
       <div class="col-xs-2">
        <p> {{shopUserMail}} </p>
       </div>
-      <div class="col-xs-2">
+      <div class="col-xs-2" *ngIf="this.authService.authenticatedUserView.shopUserId != this.shopUserView.shopUserId">
         <button class="btn btn-danger" (click)="onDeleteShopUser()">Delete ShopUser</button>
       </div>
     </div>

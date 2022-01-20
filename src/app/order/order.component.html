@@ -1,4 +1,11 @@
-<div class="row">
+<div class="row" *ngIf="orderService.bikesInCart.length == 0">
+  <div class="col-xs-12">
+    <p>Uw winkelwagen is nog leeg.</p>
+    <br>
+    <button class="btn btn-primary btn-success btn-lg pull-left" routerLink="/shop">Ga naar de winkel</button>
+  </div>
+</div>
+<div class="row" *ngIf="orderService.bikesInCart.length > 0">
   <div class="col-xs-12">
     <hr>
     <h1>Totale Prijs: &euro; {{orderService.totalOrderPrice}} </h1>
@@ -6,11 +13,15 @@
     <div class="row">
       <button class="btn btn-primary btn-success" [disabled]="orderService.bikesInCart.length === 0" (click)="onOrderButtonPressed()">Bestellen!</button>
     </div>
-    <hr>
+    <div *ngIf="orderService.bikesInCart.length>0">
+      <hr>
+    </div>
     <app-order-item
       *ngFor="let singleBike of orderService.bikesInCart, let i = index" [bikeIndex]="i"
       [bike]="singleBike"></app-order-item>
-    <hr>
+    <div *ngIf="orderService.bikesInCart.length>0">
+      <hr>
+    </div>
     <div class="row">
       <button class="btn btn-primary btn-success" [disabled]="orderService.bikesInCart.length === 0" (click)="onOrderButtonPressed()">Bestellen!</button>
     </div>
