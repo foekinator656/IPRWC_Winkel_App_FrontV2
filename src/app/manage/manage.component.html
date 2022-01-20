@@ -4,11 +4,15 @@
     <button class="btn btn-primary" (click)="onShowUserToggle()">
       {{showUserToggle ? "Verberg users" : "Geef users weer" }}
     </button>
+      <br><br>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-6" >
+    </div>
+    <div class="col-xs-3" >
       <button class="btn btn-primary" (click)="onShowOrdersToggle()">
         {{showOrdersToggle ? "Verberg orders" : "Geef orders weer" }}
       </button>
+      <br><br>
     </div>
   </div>
   <div class="row" *ngIf="showUserToggle">

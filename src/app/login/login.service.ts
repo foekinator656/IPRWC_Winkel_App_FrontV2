@@ -76,25 +76,20 @@ export class LoginService {
     let newShopUserSaved = false;
 
     if (!this.userIsLoggedIn) {
-      console.log(registrationRequest);
       this.http.post<ShopUserAuth>(this.apiService.apiUrl + 'shopUser/register', registrationRequest)
         .subscribe(shopUserAuth => {
           this.authService.authenticatedUser = shopUserAuth;
           this.userIsLoggedIn = true;
           newShopUserSaved = true;
-          this.makeWelcomeString();
           // registrated user is always a customer
           this.userIsAdmin = false;
         }, error => {
-          console.log(error);
           this.errorMessage = error;
         }
       );
     }
 
-    while (!newShopUserSaved){
-      await this.delay(100);
-    }
+
 
     this.userIsLoggedIn = true;
     this.router.navigate(['/','account']);
@@ -126,7 +121,5 @@ export class LoginService {
     while (!newShopUserSaved){
       await this.delay(100);
     }
-    console.log(" ---- ERROR ----"+ this.errorMessage);
-    console.log(" ---- shopUserAuth ----"+ this.authService.authenticatedUser)
   }
 }

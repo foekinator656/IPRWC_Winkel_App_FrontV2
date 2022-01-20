@@ -4,6 +4,24 @@
       <div class="alert alert-danger" *ngIf="this.userReportingService.errorMessage">
         <p><strong>Probleem met laden user van de database</strong></p>
       </div>
+      <div class="list-group-item clearfix">
+        <div class="row">
+          <div class="col-xs-2">
+            <p><strong>Gebruiker ID</strong></p>
+          </div>
+          <div class="col-xs-2">
+            <p><strong>Gebruiker naam</strong></p>
+          </div>
+          <div class="col-xs-2">
+            <p><strong>Gebruiker Email</strong></p>
+          </div>
+          <div class="col-xs-2">
+            <p><strong>Actie</strong></p>
+          </div>
+        </div>
+      </div>
+
+
       <app-user-list-item
         *ngFor="let singleUserView of this.userReportingService.shopUserViews; let shopUserIndex = index"
         [shopUserView]="singleUserView"

@@ -3,6 +3,19 @@
     <div class="alert alert-danger" *ngIf="this.orderReportingService.errorMessage">
       <p><strong>Probleem met laden Orders van de database</strong></p>
     </div>
+      <div class="list-group-item clearfix">
+        <div class="row">
+          <div class="col-xs-2">
+          <p><strong>Bestel Nummer</strong></p>
+          </div>
+          <div class="col-xs-2">
+            <p><strong>Prijs</strong></p>
+          </div>
+          <div class="col-xs-2">
+           <p><strong>Status</strong></p>
+          </div>
+        </div>
+      </div>
     <app-order-list-item
       *ngFor="let singleOrder of this.orderReportingService.bikeOrders; let i = index"
       [bikeOrder]="singleOrder"

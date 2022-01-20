@@ -31,9 +31,11 @@ export class AccountService {
       let shopUserView = this.accountViewUser;
       let shopUserId = shopUserView.shopUserId;
 
-      this.http.post<ShopUser>(this.apiService.apiUrl + 'shopUser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
-        .subscribe(shopUser => {
-          this.accountViewUser = shopUser;
+      this.http.post<ShopUserView>(this.apiService.apiUrl + 'shopUser/update/'+shopUserId+paramsString, this.authService.authenticatedUser)
+        .subscribe(shopUserView => {
+          this.accountViewUser = shopUserView;
+          this.authService.authenticatedUserView = shopUserView;
+          console.log(shopUserView);
           this.changeAddressMode = false;
           }, error => {
             this.errorMessage = error;
@@ -50,6 +52,8 @@ export class AccountService {
     this.http.post<ShopUserView>(this.apiService.apiUrl + 'shopUser/mail/'+shopUserEmail, this.authService.authenticatedUser)
       .subscribe(shopUserView => {
           this.accountViewUser = shopUserView;
+          this.authService.authenticatedUserView = this.accountViewUser;
+        this.authService.authenticatedUserView = shopUserView;
           shopUserViewReceived = true;
           this.changeAddressMode = false;
         }, error => {
